@@ -16,6 +16,7 @@ class _UserRegistrationState extends State<UserRegistration> {
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
             child: TextField(
@@ -38,6 +39,7 @@ class _UserRegistrationState extends State<UserRegistration> {
               ),
             ),
           ),
+          SizedBox(height: 10),
           Container(
             child: TextField(
               autofocus: true,
@@ -59,6 +61,7 @@ class _UserRegistrationState extends State<UserRegistration> {
               ),
             ),
           ),
+          SizedBox(height: 10),
           Container(
             child: TextField(
               autofocus: true,
@@ -80,7 +83,9 @@ class _UserRegistrationState extends State<UserRegistration> {
               ),
             ),
           ),
-          Container(
+          SizedBox(height: 10),
+          Container
+          (
             child: TextField(
               autofocus: true,
               cursorColor: Colors.amber,
@@ -101,6 +106,7 @@ class _UserRegistrationState extends State<UserRegistration> {
               ),
             ),
           ),
+          SizedBox(height: 10),
           Container(
             child: TextField(
               autofocus: true,

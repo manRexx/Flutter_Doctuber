@@ -11,9 +11,10 @@ class _U_LocationState extends State<U_Location> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            'Your Location has been sent and Medical help will soon arrive',
+            'Your Location has been sent and Medical help will soon arrive', textAlign: TextAlign.center,
           ),
         ],
       ),
