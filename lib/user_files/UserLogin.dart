@@ -15,6 +15,7 @@ class _UserLoginState extends State<UserLogin> {
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
             child: TextField(
@@ -37,6 +38,7 @@ class _UserLoginState extends State<UserLogin> {
               ),
             ),
           ),
+          SizedBox(height: 10),
           Container(
             child: TextField(
               autofocus: true,
@@ -58,11 +60,13 @@ class _UserLoginState extends State<UserLogin> {
               ),
             ),
           ),
+          SizedBox(height: 20,),
           Container(
             child: Material(
               child: MaterialButton(
                 child: Text('Next',
                 ),
+                onPressed: () {},
               ),
             ),
           ),

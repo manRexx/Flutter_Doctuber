@@ -11,11 +11,12 @@ class _D_EmergencyState extends State<D_Emergency> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text('An emergency has occurred in your locality, would you like to go their?'),
           Material(
             color: Colors.blueAccent,
-            borderRadius: BorderRadius.circular(30.0),
+            borderRadius: BorderRadius.circular(5.0),
             child: MaterialButton(
               onPressed: (){
                 setState(() {
@@ -28,7 +29,7 @@ class _D_EmergencyState extends State<D_Emergency> {
           ),
       Material(
         color: Colors.blueAccent,
-        borderRadius: BorderRadius.circular(30.0),
+        borderRadius: BorderRadius.circular(5.0),
         child: MaterialButton(
           onPressed: (){
             setState(() {

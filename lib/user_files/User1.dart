@@ -13,12 +13,14 @@ class _User1State extends State<User1> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
             padding: EdgeInsets.all(20.0),
             child: Material(
               color: Colors.blueAccent,
-              borderRadius: BorderRadius.circular(30.0),
+              borderRadius: BorderRadius.circular(5.0),
               child: MaterialButton(
                 onPressed: () {
                   setState(() {});
@@ -39,7 +41,7 @@ class _User1State extends State<User1> {
             padding: EdgeInsets.all(20.0),
             child: Material(
               color: Colors.blueAccent,
-              borderRadius: BorderRadius.circular(30.0),
+              borderRadius: BorderRadius.circular(5.0),
               child: MaterialButton(
                 onPressed: () {
                   setState(() {});
