@@ -28,7 +28,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 padding: EdgeInsets.all(20.0),
                 child: Material(
                   color: Colors.blueAccent,
-                  borderRadius: BorderRadius.circular(30.0),
+                  borderRadius: BorderRadius.circular(5.0),
                   child: MaterialButton(
                     onPressed: () {
                       setState(() {});
@@ -50,7 +50,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 padding: EdgeInsets.all(20.0),
                 child: Material(
                   color: Colors.blueAccent,
-                  borderRadius: BorderRadius.circular(30.0),
+                  borderRadius: BorderRadius.circular(5.0),
                   child: MaterialButton(
                     onPressed: () {
                       setState(() {});

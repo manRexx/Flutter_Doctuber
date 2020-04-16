@@ -15,6 +15,8 @@ class _DoctorLoginState extends State<DoctorLogin> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
             child: TextField(
@@ -37,6 +39,7 @@ class _DoctorLoginState extends State<DoctorLogin> {
               ),
             ),
           ),
+          SizedBox(height : 10.0),
           Container(
             child: TextField(
               autofocus: true,
@@ -58,6 +61,7 @@ class _DoctorLoginState extends State<DoctorLogin> {
               ),
             ),
           ),
+          SizedBox(height: 10.0),
           Container(
             child: Material(
               child: MaterialButton(

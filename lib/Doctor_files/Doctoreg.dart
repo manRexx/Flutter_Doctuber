@@ -18,6 +18,7 @@ class _DoctoregState extends State<Doctoreg> {
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           TextField(
             autofocus: true,
@@ -38,6 +39,7 @@ class _DoctoregState extends State<Doctoreg> {
               ),
             ),
           ),
+          SizedBox(height: 10.0),
           TextField(
             autofocus: true,
             cursorColor: Colors.amber,
@@ -57,6 +59,7 @@ class _DoctoregState extends State<Doctoreg> {
               ),
             ),
           ),
+          SizedBox(height: 10.0),
           TextField(
             autofocus: true,
             cursorColor: Colors.amber,
@@ -75,10 +78,10 @@ class _DoctoregState extends State<Doctoreg> {
               ),
             ),
           ),
-
+          SizedBox(height: 30.0),
           Material(
             color: Colors.blueAccent,
-            borderRadius: BorderRadius.circular(30.0),
+            borderRadius: BorderRadius.circular(5.0),
             child: MaterialButton(
               onPressed: () {
                 setState(() {});

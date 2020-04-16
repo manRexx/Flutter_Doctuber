@@ -13,11 +13,14 @@ class _Doctor1State extends State<Doctor1> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
+            padding:EdgeInsets.all(15),
             child: Material(
               color: Colors.blueAccent,
-              borderRadius: BorderRadius.circular(30.0),
+              borderRadius: BorderRadius.circular(5.0),
               child: MaterialButton(
                 onPressed: () {
                   setState(() {});
@@ -35,10 +38,10 @@ class _Doctor1State extends State<Doctor1> {
             ),
           ),
           Container(
-            padding: EdgeInsets.all(20.0),
+            padding: EdgeInsets.all(15),
             child: Material(
               color: Colors.blueAccent,
-              borderRadius: BorderRadius.circular(30.0),
+              borderRadius: BorderRadius.circular(5.0),
               child: MaterialButton(
                 onPressed: () {
                   setState(() {});

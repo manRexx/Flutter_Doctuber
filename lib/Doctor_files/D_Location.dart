@@ -10,10 +10,14 @@ class _D_LocationState extends State<D_Location> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Text('Your Location is being sent and if an urgency pops up, we will contact you',),
-        ],
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('Your Location is being sent and if an urgency pops up, we will contact you',textAlign: TextAlign.center,),
+          ],
+        ),
       ),
     );
   }
