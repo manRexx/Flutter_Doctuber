@@ -10,6 +10,10 @@ class _U_LocationState extends State<U_Location> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar
+      (
+          title: Text('User App'),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[

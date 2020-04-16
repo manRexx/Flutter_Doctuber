@@ -17,6 +17,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar
+      (
+          title: Center(child: Text('Emergency App'),),
+      ),
       body: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
