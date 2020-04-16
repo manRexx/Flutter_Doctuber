@@ -1,16 +1,34 @@
+import 'package:doctorapp/Doctor_files/D_emergency.dart';
 import 'package:flutter/material.dart';
-
+import 'package:doctorapp/services/auth.dart';
 
 class DoctorLogin extends StatefulWidget {
   static const String id='DoctorLogin';
+  final auth = new Auth();
   @override
   _DoctorLoginState createState() => _DoctorLoginState();
 }
 
 class _DoctorLoginState extends State<DoctorLogin> {
-  String k_d_email;
-  String k_d_password;
+  
+  String get k_d_email => _dEmailController.text;
+  String get k_d_password => _dPasswordController.text;
 
+  final TextEditingController _dEmailController = TextEditingController();
+  final TextEditingController _dPasswordController = TextEditingController();
+
+  void _submit() async
+  {
+     try
+     { 
+      await widget.auth.signInWithEmailAndPassword(k_d_email, k_d_password);
+      Navigator.pushNamed(context, D_Emergency.id);
+     }catch(e)
+     {
+       print(e.toString());
+     }
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,9 +42,7 @@ class _DoctorLoginState extends State<DoctorLogin> {
               cursorColor: Colors.amber,
               keyboardType: TextInputType.emailAddress,
               textAlign: TextAlign.center,
-              onChanged: (value){
-                k_d_email=value;
-              },
+              controller : _dEmailController,
               decoration: InputDecoration(
                 hintText: 'Enter your Email',
                 border: OutlineInputBorder(
@@ -46,9 +62,7 @@ class _DoctorLoginState extends State<DoctorLogin> {
               cursorColor: Colors.amber,
               obscureText: true,
               textAlign: TextAlign.center,
-              onChanged: (value){
-                k_d_password=value;
-              },
+              controller: _dPasswordController,
               decoration: InputDecoration(
                 hintText: 'Enter your Password',
                 border: OutlineInputBorder(
@@ -65,10 +79,7 @@ class _DoctorLoginState extends State<DoctorLogin> {
           Container(
             child: Material(
               child: MaterialButton(
-                onPressed: (){
-                  setState(() {
-                  });
-                },
+                onPressed: _submit,
                 child: Text('Next',),
               ),
             ),

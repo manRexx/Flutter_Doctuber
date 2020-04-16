@@ -13,34 +13,30 @@ class _D_EmergencyState extends State<D_Emergency> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text('An emergency has occurred in your locality, would you like to go their?'),
-          Material(
+          Center (child : Text('An emergency has occurred in your locality, would you like to go there?'),),
+          SizedBox(height:20.0),
+           Material(
             color: Colors.blueAccent,
             borderRadius: BorderRadius.circular(5.0),
             child: MaterialButton(
-              onPressed: (){
-                setState(() {
-                });
-              },
+              onPressed: null,
               child: Text(
                 'Yes',
               ),
             ),
-          ),
-      Material(
-        color: Colors.blueAccent,
-        borderRadius: BorderRadius.circular(5.0),
-        child: MaterialButton(
-          onPressed: (){
-            setState(() {
-            });
-          },
-
-          child: Text(
-            'No',
-          ),
-        ) ,
-      )],
+           ),
+           SizedBox(height: 10.0),
+           Material(
+            color: Colors.blueAccent,
+            borderRadius: BorderRadius.circular(5.0),
+            child: MaterialButton(
+              onPressed: null,
+              child: Text(
+                'No',
+              ),
+            ) ,
+           ),
+        ],
       ),
     );
   }
