@@ -6,11 +6,20 @@ class UserRegistration extends StatefulWidget {
 }
 
 class _UserRegistrationState extends State<UserRegistration> {
-  String k_u_email;
-  String k_u_password;
-  String k_u_phone_number;
-  String k_u_emergency_contact;
-  String k_u_address;
+  String get k_u_email => _uEmailController.text;
+  String get k_u_password => _uPasswordController.text;
+  String get k_u_phone_number => _uPhoneController.text;
+  String get k_u_emergency_contact => _uEmergencyController.text;
+  String get k_u_address => _uAddressController.text;
+
+
+  final TextEditingController _uEmailController = TextEditingController();
+  final TextEditingController _uPasswordController = TextEditingController();
+  final TextEditingController _uPhoneController = TextEditingController();
+  final TextEditingController _uEmergencyController = TextEditingController();
+  final TextEditingController _uAddressController = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,9 +33,7 @@ class _UserRegistrationState extends State<UserRegistration> {
               cursorColor: Colors.amber,
               keyboardType: TextInputType.emailAddress,
               textAlign: TextAlign.center,
-              onChanged: (value){
-                k_u_email=value;
-              },
+              controller: _uEmailController,
               decoration: InputDecoration(
                 hintText: 'Enter your Email',
                 border: OutlineInputBorder(
@@ -46,9 +53,7 @@ class _UserRegistrationState extends State<UserRegistration> {
               cursorColor: Colors.amber,
               obscureText: true,
               textAlign: TextAlign.center,
-              onChanged: (value){
-                k_u_password=value;
-              },
+              controller: _uPasswordController,
               decoration: InputDecoration(
                 hintText: 'Enter your Password',
                 border: OutlineInputBorder(
@@ -68,9 +73,7 @@ class _UserRegistrationState extends State<UserRegistration> {
               cursorColor: Colors.amber,
               keyboardType: TextInputType.emailAddress,
               textAlign: TextAlign.center,
-              onChanged: (value){
-                k_u_phone_number=value;
-              },
+              controller:_uPhoneController,
               decoration: InputDecoration(
                 hintText: 'Enter your Phone number',
                 border: OutlineInputBorder(
@@ -91,9 +94,7 @@ class _UserRegistrationState extends State<UserRegistration> {
               cursorColor: Colors.amber,
               keyboardType: TextInputType.emailAddress,
               textAlign: TextAlign.center,
-              onChanged: (value){
-                k_u_emergency_contact=value;
-              },
+              controller: _uEmergencyController,
               decoration: InputDecoration(
                 hintText: 'Enter your Emergency Contact',
                 border: OutlineInputBorder(
@@ -113,9 +114,7 @@ class _UserRegistrationState extends State<UserRegistration> {
               cursorColor: Colors.amber,
               keyboardType: TextInputType.emailAddress,
               textAlign: TextAlign.center,
-              onChanged: (value){
-                k_u_address=value;
-              },
+              controller: _uAddressController,
               decoration: InputDecoration(
                 hintText: 'Enter your Address',
                 border: OutlineInputBorder(

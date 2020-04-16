@@ -7,8 +7,11 @@ class UserLogin extends StatefulWidget {
 }
 
 class _UserLoginState extends State<UserLogin> {
-  String k_u_email;
-  String k_u_password;
+  String get k_u_email => _uEmailController.text;
+  String get k_u_password => _uPasswordController.text;
+
+  final TextEditingController _uEmailController = TextEditingController();
+  final TextEditingController _uPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +26,7 @@ class _UserLoginState extends State<UserLogin> {
               cursorColor: Colors.amber,
               keyboardType: TextInputType.emailAddress,
               textAlign: TextAlign.center,
-              onChanged: (value){
-                k_u_email=value;
-              },
+              controller: _uEmailController,
               decoration: InputDecoration(
                 hintText: 'Enter your Email',
                 border: OutlineInputBorder(
@@ -45,9 +46,7 @@ class _UserLoginState extends State<UserLogin> {
               cursorColor: Colors.amber,
               obscureText: true,
               textAlign: TextAlign.center,
-              onChanged: (value){
-                k_u_password=value;
-              },
+              controller: _uPasswordController,
               decoration: InputDecoration(
                 hintText: 'Enter your Password',
                 border: OutlineInputBorder(

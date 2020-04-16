@@ -1,17 +1,36 @@
 import 'package:doctorapp/Doctor_files/D_Location.dart';
 import 'package:flutter/material.dart';
 import 'D_Location.dart';
+import 'package:doctorapp/services/auth.dart';
 
 class Doctoreg extends StatefulWidget {
   static const String id='Doctoreg';
+  final auth = new Auth();
   @override
   _DoctoregState createState() => _DoctoregState();
 }
 
 class _DoctoregState extends State<Doctoreg> {
-  String k_d_email;
-  String k_d_password;
-  String k_d_phonenumber;
+  final TextEditingController _dEmailController = TextEditingController();
+  final TextEditingController _dPasswordController = TextEditingController();
+  final TextEditingController _dPhoneController = TextEditingController();
+  
+  String get k_d_email => _dEmailController.text;
+  String get k_d_password => _dPasswordController.text;
+  String get k_d_phonenumber => _dPhoneController.text;
+
+  void _submit() async
+  {
+     try
+     { 
+      print('Alert Emergency Triggered');
+      await widget.auth.createUserWithEmailAndPassword(k_d_email, k_d_password);
+      Navigator.pushNamed(context, D_Location.id);
+     }catch(e)
+     {
+       print(e.toString());
+     }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +44,7 @@ class _DoctoregState extends State<Doctoreg> {
             cursorColor: Colors.amber,
             keyboardType: TextInputType.emailAddress,
             textAlign: TextAlign.center,
-            onChanged: (value){
-              k_d_email=value;
-            },
+            controller: _dEmailController,
             decoration: InputDecoration(
               hintText: 'Enter your Email',
               border: OutlineInputBorder(
@@ -45,9 +62,7 @@ class _DoctoregState extends State<Doctoreg> {
             cursorColor: Colors.amber,
             obscureText: true,
             textAlign: TextAlign.center,
-            onChanged: (value){
-              k_d_password=value;
-            },
+            controller: _dPasswordController,
             decoration: InputDecoration(
               hintText: 'Enter your Password',
               border: OutlineInputBorder(
@@ -64,9 +79,8 @@ class _DoctoregState extends State<Doctoreg> {
             autofocus: true,
             cursorColor: Colors.amber,
             textAlign: TextAlign.center,
-            onChanged: (value){
-              k_d_phonenumber=value;
-            },
+            controller: _dPhoneController,
+            keyboardType: TextInputType.number,
             decoration: InputDecoration(
               hintText: 'Enter your Phone Number',
               border: OutlineInputBorder(
@@ -83,11 +97,7 @@ class _DoctoregState extends State<Doctoreg> {
             color: Colors.blueAccent,
             borderRadius: BorderRadius.circular(5.0),
             child: MaterialButton(
-              onPressed: () {
-                setState(() {});
-                print('Alert Emergency Triggerd');
-                Navigator.pushNamed(context, D_Location.id);
-              },
+              onPressed: _submit,
               child: Text(
                 'Doctor Page',
                 style: TextStyle(
