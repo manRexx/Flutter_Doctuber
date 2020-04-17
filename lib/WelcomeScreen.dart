@@ -1,7 +1,6 @@
 import 'package:doctorapp/Doctor_files/Doctor1.dart';
 import 'package:doctorapp/user_files/User1.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 
 
 class WelcomeScreen extends StatefulWidget {
@@ -11,9 +10,7 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  void getLocation() async{
-    Position k_position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.bestForNavigation);
-}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
