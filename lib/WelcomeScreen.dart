@@ -1,4 +1,5 @@
 import 'package:doctorapp/Doctor_files/Doctor1.dart';
+import 'package:doctorapp/user_files/U_Location.dart';
 import 'package:doctorapp/user_files/User1.dart';
 import 'package:flutter/material.dart';
 
@@ -42,7 +43,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                 ),
               ),
-
               Container(
                 padding: EdgeInsets.all(20.0),
                 child: Material(
@@ -62,6 +62,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                     ),
                   ),
+                ),
+              ),
+              Container(
+                child: MaterialButton(
+                  onPressed: (){
+                    setState(() {});
+                    Navigator.pushNamed(context, U_Location.id);
+                  },
+                  child: Image.asset('images/Emergency1.png',
+                  scale: 5, ),
                 ),
               ),
             ],
