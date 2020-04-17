@@ -19,7 +19,7 @@ class _Doctor1State extends State<Doctor1> {
           Container(
             padding:EdgeInsets.all(15),
             child: Material(
-              color: Colors.blueAccent,
+              color: Colors.cyan,
               borderRadius: BorderRadius.circular(5.0),
               child: MaterialButton(
                 onPressed: () {
@@ -40,7 +40,7 @@ class _Doctor1State extends State<Doctor1> {
           Container(
             padding: EdgeInsets.all(15),
             child: Material(
-              color: Colors.blueAccent,
+              color: Colors.cyan,
               borderRadius: BorderRadius.circular(5.0),
               child: MaterialButton(
                 onPressed: () {

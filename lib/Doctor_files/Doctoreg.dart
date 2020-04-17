@@ -39,67 +39,74 @@ class _DoctoregState extends State<Doctoreg> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          TextField(
-            autofocus: true,
-            cursorColor: Colors.amber,
-            keyboardType: TextInputType.emailAddress,
-            textAlign: TextAlign.center,
-            controller: _dEmailController,
-            decoration: InputDecoration(
-              hintText: 'Enter your Email',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5.0),
-                borderSide: BorderSide(
-                  color: Colors.amber,
-                  style: BorderStyle.solid,
+          Container(
+            padding: EdgeInsets.all(20.0),
+            child: TextField(
+              autofocus: true,
+              cursorColor: Colors.amber,
+              keyboardType: TextInputType.emailAddress,
+              textAlign: TextAlign.center,
+              controller: _dEmailController,
+              decoration: InputDecoration(
+                hintText: 'Enter your Email',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: BorderSide(
+                    color: Colors.amber,
+                    style: BorderStyle.solid,
+                  ),
                 ),
               ),
             ),
           ),
-          SizedBox(height: 10.0),
-          TextField(
-            autofocus: true,
-            cursorColor: Colors.amber,
-            obscureText: true,
-            textAlign: TextAlign.center,
-            controller: _dPasswordController,
-            decoration: InputDecoration(
-              hintText: 'Enter your Password',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5.0),
-                borderSide: BorderSide(
-                  color: Colors.amber,
-                  style: BorderStyle.solid,
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: TextField(
+              autofocus: true,
+              cursorColor: Colors.amber,
+              obscureText: true,
+              textAlign: TextAlign.center,
+              controller: _dPasswordController,
+              decoration: InputDecoration(
+                hintText: 'Enter your Password',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: BorderSide(
+                    color: Colors.amber,
+                    style: BorderStyle.solid,
+                  ),
                 ),
               ),
             ),
           ),
-          SizedBox(height: 10.0),
-          TextField(
-            autofocus: true,
-            cursorColor: Colors.amber,
-            textAlign: TextAlign.center,
-            controller: _dPhoneController,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              hintText: 'Enter your Phone Number',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5.0),
-                borderSide: BorderSide(
-                  color: Colors.amber,
-                  style: BorderStyle.solid,
+          Container(
+            padding: EdgeInsets.all(20.0),
+            child: TextField(
+              autofocus: true,
+              cursorColor: Colors.amber,
+              textAlign: TextAlign.center,
+              controller: _dPhoneController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintText: 'Enter your Phone Number',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: BorderSide(
+                    color: Colors.amber,
+                    style: BorderStyle.solid,
+                  ),
                 ),
               ),
             ),
           ),
           SizedBox(height: 30.0),
           Material(
-            color: Colors.blueAccent,
+            color: Colors.cyan,
             borderRadius: BorderRadius.circular(5.0),
             child: MaterialButton(
               onPressed: _submit,
               child: Text(
-                'Doctor Page',
+                'Register',
                 style: TextStyle(
                   fontSize: 40,
                   fontWeight: FontWeight.w400,

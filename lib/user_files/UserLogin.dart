@@ -21,6 +21,7 @@ class _UserLoginState extends State<UserLogin> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
+            padding: EdgeInsets.all(20.0),
             child: TextField(
               autofocus: true,
               cursorColor: Colors.amber,
@@ -39,8 +40,9 @@ class _UserLoginState extends State<UserLogin> {
               ),
             ),
           ),
-          SizedBox(height: 10),
+          //SizedBox(height: 10),
           Container(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: TextField(
               autofocus: true,
               cursorColor: Colors.amber,
@@ -61,11 +63,16 @@ class _UserLoginState extends State<UserLogin> {
           ),
           SizedBox(height: 20,),
           Container(
+            padding: EdgeInsets.symmetric(horizontal: 100.0),
             child: Material(
+              color: Colors.cyan,
+              borderRadius: BorderRadius.circular(5.0),
               child: MaterialButton(
-                child: Text('Next',
-                ),
-                onPressed: () {},
+                onPressed: (){},
+                child: Text('Login',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                  ),),
               ),
             ),
           ),

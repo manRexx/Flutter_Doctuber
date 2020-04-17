@@ -19,7 +19,7 @@ class _User1State extends State<User1> {
           Container(
             padding: EdgeInsets.all(20.0),
             child: Material(
-              color: Colors.blueAccent,
+              color: Colors.cyan,
               borderRadius: BorderRadius.circular(5.0),
               child: MaterialButton(
                 onPressed: () {
@@ -40,7 +40,7 @@ class _User1State extends State<User1> {
           Container(
             padding: EdgeInsets.all(20.0),
             child: Material(
-              color: Colors.blueAccent,
+              color: Colors.cyan,
               borderRadius: BorderRadius.circular(5.0),
               child: MaterialButton(
                 onPressed: () {
