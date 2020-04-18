@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class UserLogin extends StatefulWidget {
   static const String id='UserLogin';
@@ -13,6 +14,8 @@ class _UserLoginState extends State<UserLogin> {
   final TextEditingController _uEmailController = TextEditingController();
   final TextEditingController _uPasswordController = TextEditingController();
 
+  bool _load=false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,67 +23,70 @@ class _UserLoginState extends State<UserLogin> {
       (
           title: Text('User App'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.all(20.0),
-            child: TextField(
-              autofocus: true,
-              cursorColor: Colors.amber,
-              keyboardType: TextInputType.emailAddress,
-              textAlign: TextAlign.center,
-              controller: _uEmailController,
-              decoration: InputDecoration(
-                hintText: 'Enter your Email',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                  borderSide: BorderSide(
-                    color: Colors.amber,
-                    style: BorderStyle.solid,
+      body: ModalProgressHUD(
+          inAsyncCall: _load,
+          child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.all(20.0),
+              child: TextField(
+                autofocus: true,
+                cursorColor: Colors.amber,
+                keyboardType: TextInputType.emailAddress,
+                textAlign: TextAlign.center,
+                controller: _uEmailController,
+                decoration: InputDecoration(
+                  hintText: 'Enter your Email',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                    borderSide: BorderSide(
+                      color: Colors.amber,
+                      style: BorderStyle.solid,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          //SizedBox(height: 10),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
-            child: TextField(
-              autofocus: true,
-              cursorColor: Colors.amber,
-              obscureText: true,
-              textAlign: TextAlign.center,
-              controller: _uPasswordController,
-              decoration: InputDecoration(
-                hintText: 'Enter your Password',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                  borderSide: BorderSide(
-                    color: Colors.amber,
-                    style: BorderStyle.solid,
+            //SizedBox(height: 10),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: TextField(
+                autofocus: true,
+                cursorColor: Colors.amber,
+                obscureText: true,
+                textAlign: TextAlign.center,
+                controller: _uPasswordController,
+                decoration: InputDecoration(
+                  hintText: 'Enter your Password',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                    borderSide: BorderSide(
+                      color: Colors.amber,
+                      style: BorderStyle.solid,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          SizedBox(height: 20,),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 100.0),
-            child: Material(
-              color: Colors.cyan,
-              borderRadius: BorderRadius.circular(5.0),
-              child: MaterialButton(
-                onPressed: (){},
-                child: Text('Login',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                  ),),
+            SizedBox(height: 20,),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 100.0),
+              child: Material(
+                color: Colors.cyan,
+                borderRadius: BorderRadius.circular(5.0),
+                child: MaterialButton(
+                  onPressed: (){},
+                  child: Text('Login',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                    ),),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
