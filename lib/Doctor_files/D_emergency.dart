@@ -13,6 +13,20 @@ class _DEmergencyState extends State<DEmergency> {
       appBar: AppBar
       (
           title: Text('Doctor App'),
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(right: 20.0),
+            child: MaterialButton(onPressed: (){},
+              child: Text(
+                'LOG-OUT',
+                style: TextStyle(
+                  color: Colors.black,
+                  backgroundColor: Colors.red,
+                  fontSize: 20.0,
+                ),
+              ),),
+          )
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -1,30 +1,47 @@
-import 'Doctor_files/Doctor1.dart';
-import 'user_files/U_Location.dart';
-import 'user_files/User1.dart';
 import 'package:flutter/material.dart';
+import 'D_emergency.dart';
 
-
-class WelcomeScreen extends StatefulWidget {
-  static const String id = 'WelcomeScreen';
+class DoctorA extends StatefulWidget {
+  static const String id='DoctorA';
   @override
-  _WelcomeScreenState createState() => _WelcomeScreenState();
+  _DoctorAState createState() => _DoctorAState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
-
+class _DoctorAState extends State<DoctorA> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar
-      (
-          title: Center(child: Text('Emergency App'),),
+        (
+        title: Center(child: Text('Emergency App'),),
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(right: 20.0),
+            child: MaterialButton(onPressed: (){},
+              child: Text(
+                'LOG-OUT',
+                style: TextStyle(
+                  color: Colors.black,
+                  backgroundColor: Colors.red,
+                  fontSize: 20.0,
+                ),
+              ),),
+          )
+        ],
       ),
-      body: Row(
+      body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Text(''
+                'Are you available at the moment to take emergency cases',
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.w900,
+            ),),
+          ),
+          Row(
             children: <Widget>[
               Container(
                 padding: EdgeInsets.all(20.0),
@@ -35,7 +52,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     onPressed: () {
                       setState(() {});
                       print('Alert Emergency Triggerd');
-                      Navigator.pushNamed(context, Doctor1.id);
+                      Navigator.pushNamed(context, DEmergency.id);
                     },
                     child: Text(
                       'Doctor Page',
@@ -55,11 +72,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: MaterialButton(
                     onPressed: () {
                       setState(() {});
-                      print('Going to user page');
-                      Navigator.pushNamed(context, User1.id);
+                      print('Alert Emergency Triggerd');
+                      //Navigator.pushNamed(context, );
                     },
                     child: Text(
-                      'User Page',
+                      'Doctor Page',
                       style: TextStyle(
                         fontSize: 40,
                         fontWeight: FontWeight.w400,
@@ -68,19 +85,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                 ),
               ),
-              Container(
-                child: MaterialButton(
-                  onPressed: (){
-                    print('Alert Emergency Triggered');
-                    setState(() {});
-                    Navigator.pushNamed(context, ULocation.id);
-                  },
-                  child: Image.asset('images/Emergency1.png',
-                  scale: 5, ),
-                ),
-              ),
             ],
-          ),
+          )
         ],
       ),
     );

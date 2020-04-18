@@ -1,13 +1,16 @@
-import 'package:doctorapp/Doctor_files/D_Location.dart';
-import 'package:doctorapp/Doctor_files/D_emergency.dart';
-import 'package:doctorapp/Doctor_files/DoctorLogin.dart';
-import 'package:doctorapp/user_files/U_Location.dart';
-import 'package:doctorapp/user_files/UserLogin.dart';
+import 'package:doctorapp/Doctor_files/DoctorA.dart';
+import 'Doctor_files/DoctorA.dart';
+import 'Doctor_files/D_Location.dart';
+import 'Doctor_files/D_emergency.dart';
+import 'Doctor_files/DoctorLogin.dart';
+import 'user_files/U_Location.dart';
+import 'user_files/UserLogin.dart';
 import 'package:flutter/material.dart';
 import 'WelcomeScreen.dart';
 import 'Doctor_files/Doctoreg.dart';
 import 'user_files/UserRegistration.dart';
 import 'Doctor_files/Doctor1.dart';
+import 'user_files/UserEmergencyCall.dart';
 import 'user_files/User1.dart';
 
 
@@ -30,6 +33,8 @@ void main()=>runApp(App());
             DLocation.id:(context)=>DLocation(),
             ULocation.id:(context)=>ULocation(),
             DEmergency.id:(context)=>DEmergency(),
+            UserEmergencyCall.id:(context)=>UserEmergencyCall(),
+            DoctorA.id:(context)=>DoctorA(),
           },
         );
       }
