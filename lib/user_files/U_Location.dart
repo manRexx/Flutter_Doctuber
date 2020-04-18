@@ -5,7 +5,6 @@ class ULocation extends StatefulWidget {
   @override
   _ULocationState createState() => _ULocationState();
 }
-
 class _ULocationState extends State<ULocation> {
   @override
   Widget build(BuildContext context) {

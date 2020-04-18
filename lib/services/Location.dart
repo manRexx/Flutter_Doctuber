@@ -16,3 +16,16 @@ class Location {
     }
   }
 }
+Future<Location> getLocation(Location location) async {
+    await location.getCurrentLocation();
+    return location;  
+  }
+
+double getLocationLongitude(Location location)
+{
+  return location.kLongitude;
+}
+double getLocationLatitude(Location location)
+{
+  return location.kLatitude;
+}

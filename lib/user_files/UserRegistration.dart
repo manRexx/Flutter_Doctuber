@@ -118,7 +118,7 @@ class _UserRegistrationState extends State<UserRegistration> {
               child: TextField(
                 autofocus: true,
                 cursorColor: Colors.amber,
-                keyboardType: TextInputType.emailAddress,
+                keyboardType: TextInputType.phone,
                 textAlign: TextAlign.center,
                 controller:_uPhoneController,
                 decoration: InputDecoration(
