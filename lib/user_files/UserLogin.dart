@@ -1,18 +1,39 @@
+import 'package:doctorapp/user_files/U_Location.dart';
 import 'package:flutter/material.dart';
+import 'package:doctorapp/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class UserLogin extends StatefulWidget {
   static const String id='UserLogin';
+  final auth = new Auth();
   @override
   _UserLoginState createState() => _UserLoginState();
 }
 
 class _UserLoginState extends State<UserLogin> {
-  String get k_u_email => _uEmailController.text;
-  String get k_u_password => _uPasswordController.text;
+  String get _kUEmail => _uEmailController.text;
+  String get _kUPassword => _uPasswordController.text;
 
   final TextEditingController _uEmailController = TextEditingController();
   final TextEditingController _uPasswordController = TextEditingController();
+
+  void _submit() async
+  {
+     try
+     { 
+      setState(() {
+        _load=true;
+      });
+      await widget.auth.signInWithEmailAndPassword(_kUEmail, _kUPassword);
+      Navigator.pushNamed(context, ULocation.id);
+      setState(() {
+        _load=false;
+      });
+     }catch(e)
+     {
+       print(e.toString());
+     }
+  }
 
   bool _load=false;
 
@@ -77,7 +98,7 @@ class _UserLoginState extends State<UserLogin> {
                 color: Colors.cyan,
                 borderRadius: BorderRadius.circular(5.0),
                 child: MaterialButton(
-                  onPressed: (){},
+                  onPressed: _submit,
                   child: Text('Login',
                     style: TextStyle(
                       fontSize: 20.0,

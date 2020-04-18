@@ -72,7 +72,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: MaterialButton(
                   onPressed: (){
                     setState(() {});
-                    Navigator.pushNamed(context, U_Location.id);
+                    Navigator.pushNamed(context, ULocation.id);
                   },
                   child: Image.asset('images/Emergency1.png',
                   scale: 5, ),

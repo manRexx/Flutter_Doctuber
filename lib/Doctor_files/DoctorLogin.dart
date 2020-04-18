@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:doctorapp/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
+
 class DoctorLogin extends StatefulWidget {
   static const String id='DoctorLogin';
   final auth = new Auth();
@@ -12,8 +13,8 @@ class DoctorLogin extends StatefulWidget {
 
 class _DoctorLoginState extends State<DoctorLogin> {
   
-  String get k_d_email => _dEmailController.text;
-  String get k_d_password => _dPasswordController.text;
+  String get _kDEmail => _dEmailController.text;
+  String get _kDPassword => _dPasswordController.text;
 
   bool _load=false;
 
@@ -27,8 +28,8 @@ class _DoctorLoginState extends State<DoctorLogin> {
       setState(() {
         _load=true;
       });
-      await widget.auth.signInWithEmailAndPassword(k_d_email, k_d_password);
-      Navigator.pushNamed(context, D_Emergency.id);
+      await widget.auth.signInWithEmailAndPassword(_kDEmail, _kDPassword);
+      Navigator.pushNamed(context, DEmergency.id);
       setState(() {
         _load=false;
       });
