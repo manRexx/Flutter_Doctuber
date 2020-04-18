@@ -8,7 +8,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Doctoreg extends StatefulWidget {
   static const String id='Doctoreg';
   final auth = new Auth();
-  final _firestore = Firestore.instance;
   @override
   _DoctoregState createState() => _DoctoregState();
 }
@@ -20,10 +19,11 @@ class _DoctoregState extends State<Doctoreg> {
   
   bool _load=false;
   String userType; 
+  final _firestore=Firestore.instance;
   
-  String get k_d_email => _dEmailController.text;
-  String get k_d_password => _dPasswordController.text;
-  String get k_d_phonenumber => _dPhoneController.text;
+  String get _kDEmail => _dEmailController.text;
+  String get _kDPassword => _dPasswordController.text;
+  String get _kDPhone => _dPhoneController.text;
 
   void _submit() async
   {
@@ -33,8 +33,15 @@ class _DoctoregState extends State<Doctoreg> {
         _load=true;
       });
       print('Alert Emergency Triggered');
-      await widget.auth.createUserWithEmailAndPassword(k_d_email, k_d_password);
-      Navigator.pushNamed(context, D_Location.id);
+      await widget.auth.createUserWithEmailAndPassword(_kDEmail, _kDPassword);
+      _firestore.collection('doctor_id').add
+      (
+        {
+          'phonenumber': _kDPhone,
+          'user': _kDEmail, 
+        }
+      );
+      Navigator.pushNamed(context, DLocation.id);
       setState(() {
         _load=false;
       });

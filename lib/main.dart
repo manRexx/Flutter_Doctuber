@@ -27,9 +27,9 @@ void main()=>runApp(App());
             DoctorLogin.id:(context)=>DoctorLogin(),
             User1.id:(context)=>User1(),
             Doctor1.id:(context)=>Doctor1(),
-            D_Location.id:(context)=>D_Location(),
-            U_Location.id:(context)=>U_Location(),
-            D_Emergency.id:(context)=>D_Emergency(),
+            DLocation.id:(context)=>DLocation(),
+            ULocation.id:(context)=>ULocation(),
+            DEmergency.id:(context)=>DEmergency(),
           },
         );
       }

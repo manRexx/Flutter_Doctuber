@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-class U_Location extends StatefulWidget {
+class ULocation extends StatefulWidget {
   static const String id='U_Location';
   @override
-  _U_LocationState createState() => _U_LocationState();
+  _ULocationState createState() => _ULocationState();
 }
-
-class _U_LocationState extends State<U_Location> {
+class _ULocationState extends State<ULocation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

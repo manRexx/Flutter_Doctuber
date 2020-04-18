@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctorapp/Doctor_files/D_emergency.dart';
 import 'package:flutter/material.dart';
 import 'package:doctorapp/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+
+
 
 class DoctorLogin extends StatefulWidget {
   static const String id='DoctorLogin';
@@ -12,10 +15,23 @@ class DoctorLogin extends StatefulWidget {
 
 class _DoctorLoginState extends State<DoctorLogin> {
   
-  String get k_d_email => _dEmailController.text;
-  String get k_d_password => _dPasswordController.text;
+  String get _kDEmail => _dEmailController.text;
+  String get _kDPassword => _dPasswordController.text;
+  String _kDPhone;
 
   bool _load=false;
+  final _firestore = Firestore.instance;
+  
+  void getData() async {
+    final messages = await _firestore.collection('doctor_id').getDocuments();
+    for (var message in messages.documents)
+    {
+      if(message.data['user']==_kDEmail)
+      {
+        _kDPhone=message.data['phonenumber'];
+      }
+    }
+  }
 
   final TextEditingController _dEmailController = TextEditingController();
   final TextEditingController _dPasswordController = TextEditingController();
@@ -27,8 +43,8 @@ class _DoctorLoginState extends State<DoctorLogin> {
       setState(() {
         _load=true;
       });
-      await widget.auth.signInWithEmailAndPassword(k_d_email, k_d_password);
-      Navigator.pushNamed(context, D_Emergency.id);
+      await widget.auth.signInWithEmailAndPassword(_kDEmail, _kDPassword);
+      Navigator.pushNamed(context, DEmergency.id);
       setState(() {
         _load=false;
       });

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-class D_Location extends StatefulWidget {
+class DLocation extends StatefulWidget {
   static const String id='D_Location';
   @override
-  _D_LocationState createState() => _D_LocationState();
+  _DLocationState createState() => _DLocationState();
 }
 
-class _D_LocationState extends State<D_Location> {
-  @override
+ 
+class _DLocationState extends State<DLocation> {
+  @override  
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar

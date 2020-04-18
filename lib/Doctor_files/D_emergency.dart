@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class D_Emergency extends StatefulWidget {
+class DEmergency extends StatefulWidget {
   static const String id='D_Emergency';
   @override
-  _D_EmergencyState createState() => _D_EmergencyState();
+  _DEmergencyState createState() => _DEmergencyState();
 }
 
-class _D_EmergencyState extends State<D_Emergency> {
+class _DEmergencyState extends State<DEmergency> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
