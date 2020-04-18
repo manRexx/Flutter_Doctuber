@@ -41,6 +41,7 @@ class _DoctorLoginState extends State<DoctorLogin> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
+            padding: EdgeInsets.all(20.0),
             child: TextField(
               autofocus: true,
               cursorColor: Colors.amber,
@@ -59,8 +60,9 @@ class _DoctorLoginState extends State<DoctorLogin> {
               ),
             ),
           ),
-          SizedBox(height : 10.0),
+
           Container(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: TextField(
               autofocus: true,
               cursorColor: Colors.amber,
@@ -79,12 +81,18 @@ class _DoctorLoginState extends State<DoctorLogin> {
               ),
             ),
           ),
-          SizedBox(height: 10.0),
+          SizedBox(height: 30.0),
           Container(
+            padding: EdgeInsets.symmetric(horizontal: 100.0),
             child: Material(
+              color: Colors.cyan,
+              borderRadius: BorderRadius.circular(5.0),
               child: MaterialButton(
                 onPressed: _submit,
-                child: Text('Next',),
+                child: Text('Login',
+                style: TextStyle(
+                  fontSize: 20.0,
+                ),),
               ),
             ),
           ),

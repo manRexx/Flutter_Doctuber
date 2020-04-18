@@ -32,6 +32,7 @@ class _UserRegistrationState extends State<UserRegistration> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
+            padding: EdgeInsets.all(20.0),
             child: TextField(
               autofocus: true,
               cursorColor: Colors.amber,
@@ -50,8 +51,8 @@ class _UserRegistrationState extends State<UserRegistration> {
               ),
             ),
           ),
-          SizedBox(height: 10),
           Container(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: TextField(
               autofocus: true,
               cursorColor: Colors.amber,
@@ -70,8 +71,8 @@ class _UserRegistrationState extends State<UserRegistration> {
               ),
             ),
           ),
-          SizedBox(height: 10),
           Container(
+            padding: EdgeInsets.all(20.0),
             child: TextField(
               autofocus: true,
               cursorColor: Colors.amber,
@@ -90,9 +91,9 @@ class _UserRegistrationState extends State<UserRegistration> {
               ),
             ),
           ),
-          SizedBox(height: 10),
           Container
           (
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: TextField(
               autofocus: true,
               cursorColor: Colors.amber,
@@ -111,8 +112,8 @@ class _UserRegistrationState extends State<UserRegistration> {
               ),
             ),
           ),
-          SizedBox(height: 10),
           Container(
+            padding: EdgeInsets.all(20.0),
             child: TextField(
               autofocus: true,
               cursorColor: Colors.amber,
@@ -126,6 +127,26 @@ class _UserRegistrationState extends State<UserRegistration> {
                   borderSide: BorderSide(
                     color: Colors.amber,
                     style: BorderStyle.solid,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 60.0),
+            child: Material(
+              color: Colors.cyan,
+              borderRadius: BorderRadius.circular(5.0),
+              child: MaterialButton(
+                onPressed: () {
+                  setState(() {});
+                  print('User Registered');
+                },
+                child: Text(
+                  'Register',
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
