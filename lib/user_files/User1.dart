@@ -12,6 +12,10 @@ class _User1State extends State<User1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar
+      (
+          title: Text('User App'),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,

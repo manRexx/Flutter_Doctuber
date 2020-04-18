@@ -10,6 +10,10 @@ class _D_EmergencyState extends State<D_Emergency> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar
+      (
+          title: Text('Doctor App'),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[

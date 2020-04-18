@@ -10,6 +10,10 @@ class _D_LocationState extends State<D_Location> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar
+      (
+          title : Text('Doctor App'),
+      ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
