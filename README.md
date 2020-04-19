@@ -38,10 +38,15 @@ To authenticate if the person registering as a doctor is real or not, we will in
 **Future Growth Possible in the Application**
 
 1)Adding a feature that displays maps  and shows the remaining distance between doctor and the user.
-\n2)Adding a map that shows the nearest clinics and hospitals
+
+2)Adding a map that shows the nearest clinics and hospitals
+
 3)A feature that allows us to book an appointment in a certain clinic or a hospital.
+
 4)Adding a feature that allows you to call  the doctor after he accepts the emergency alert.
+
 5)Calling the ambulance as soon as the alert is triggered.
+
 6)Adding maximum time limit with which the doctor is allowed to accept the emergency.
 
 
