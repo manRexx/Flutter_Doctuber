@@ -50,4 +50,4 @@ To authenticate if the person registering as a doctor is real or not, we will in
 6)Adding maximum time limit with which the doctor is allowed to accept the emergency.
 
 
-**Note to run this this app, Google.json file is required**
+**Note to run this this app, Googleservices.json file is required**
