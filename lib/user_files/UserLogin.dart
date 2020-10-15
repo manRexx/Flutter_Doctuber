@@ -36,9 +36,6 @@ class _UserLoginState extends State<UserLogin> {
   //   }
   // }
 
-
-  // Location of the user will be sent from _submit function && we have to create a continues fn to update location value to firebase
-
   void _submit() async
   {
      try
