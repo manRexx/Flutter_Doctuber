@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctorapp/services/auth.dart';
 import 'package:doctorapp/user_files/U_Location.dart';
 
+import 'UserLogin.dart';
+
 class UserRegistration extends StatefulWidget {
   static const String id='UserRegistration';
   final auth = new Auth();
@@ -42,7 +44,10 @@ class _UserRegistrationState extends State<UserRegistration> {
         }
       );
       print('User Registered');
-      Navigator.pushNamed(context,ULocation.id);
+
+      // should be pushNamed to UserLogin
+
+      Navigator.pushNamed(context,UserLogin.id);
       setState(() {
         _load=false;
       });
