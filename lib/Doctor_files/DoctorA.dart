@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'D_emergency.dart';
+import 'package:doctorapp/services/auth.dart' as auth;
 
 class DoctorA extends StatefulWidget {
   static const String id = 'DoctorA';
@@ -19,12 +20,13 @@ class _DoctorAState extends State<DoctorA> {
           Padding(
             padding: EdgeInsets.only(right: 20.0),
             child: MaterialButton(
-              onPressed: () {},
+              onPressed: () {
+                auth.auth.signOut();
+              },
               child: Text(
-                'LOG-OUT',
+                'Log Out',
                 style: TextStyle(
-                  color: Colors.black,
-                  backgroundColor: Colors.red,
+                  color: Colors.white,
                   fontSize: 20.0,
                 ),
               ),
@@ -39,7 +41,8 @@ class _DoctorAState extends State<DoctorA> {
             padding: EdgeInsets.all(20.0),
             child: Text(
               ''
-              'Are you available at the moment to take emergency cases',
+              'Are you available at the moment to take emergency cases?',
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.w900,
@@ -47,11 +50,12 @@ class _DoctorAState extends State<DoctorA> {
             ),
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
                 padding: EdgeInsets.all(20.0),
                 child: Material(
-                  color: Colors.cyan,
+                  color: Colors.red[300],
                   borderRadius: BorderRadius.circular(5.0),
                   child: MaterialButton(
                     onPressed: () {
@@ -60,9 +64,9 @@ class _DoctorAState extends State<DoctorA> {
                       Navigator.pushNamed(context, DEmergency.id);
                     },
                     child: Text(
-                      'Doctor Page',
+                      'Yes',
                       style: TextStyle(
-                        fontSize: 40,
+                        fontSize: 20,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
@@ -72,18 +76,18 @@ class _DoctorAState extends State<DoctorA> {
               Container(
                 padding: EdgeInsets.all(20.0),
                 child: Material(
-                  color: Colors.cyan,
+                  color: Colors.red[300],
                   borderRadius: BorderRadius.circular(5.0),
                   child: MaterialButton(
                     onPressed: () {
                       setState(() {});
                       print('Alert Emergency Triggerd');
-                      //Navigator.pushNamed(context, );
+                      Navigator.pop(context);
                     },
                     child: Text(
-                      'Doctor Page',
+                      'No',
                       style: TextStyle(
-                        fontSize: 40,
+                        fontSize: 20,
                         fontWeight: FontWeight.w400,
                       ),
                     ),

@@ -1,16 +1,16 @@
-import 'package:doctorapp/Doctor_files/D_Location.dart';
+import 'dart:io';
+import 'package:doctorapp/Doctor_files/DoctorA.dart';
 import 'package:flutter/material.dart';
-import 'D_Location.dart';
-import 'DoctorA.dart';
-import 'package:doctorapp/services/auth.dart';
+import 'package:doctorapp/services/auth.dart' as auth;
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_core/firebase_core.dart' as firebase_core;
 
 class Doctoreg extends StatefulWidget {
   static const String id = 'Doctoreg';
-  final auth = new Auth();
   @override
   _DoctoregState createState() => _DoctoregState();
 }
@@ -22,6 +22,7 @@ class _DoctoregState extends State<Doctoreg> {
 
   bool _load = false;
   String userType;
+  FilePickerResult _paths;
   final _firestore = FirebaseFirestore.instance;
 
   String get _kDEmail => _dEmailController.text;
@@ -34,13 +35,16 @@ class _DoctoregState extends State<Doctoreg> {
         _load = true;
       });
       print('Alert Emergency Triggered');
-      await widget.auth.createUserWithEmailAndPassword(_kDEmail, _kDPassword);
+      await auth.auth.createUserWithEmailAndPassword(_kDEmail, _kDPassword);
       _firestore.collection('doctor_id').add({
         'phonenumber': _kDPhone,
         'user': _kDEmail,
       });
-
-      Navigator.pushNamed(context, DLocation.id);
+      if (_paths != null) {
+        File filePath = File(_paths.files.first.path);
+        uploadFileWithMetadata(filePath);
+      }
+      Navigator.pushNamed(context, DoctorA.id);
       setState(() {
         _load = false;
       });
@@ -49,28 +53,46 @@ class _DoctoregState extends State<Doctoreg> {
     }
   }
 
-  List<PlatformFile> _paths;
-  FileType _pickingType = FileType.custom;
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  // }
 
   void _openFileExplorer() async {
     try {
       _paths = (await FilePicker.platform.pickFiles(
-        type: _pickingType,
+        type: FileType.custom,
         allowMultiple: false,
         allowedExtensions: ['pdf', 'jpg', 'jpeg'],
-      ))
-          ?.files;
+      ));
     } on PlatformException catch (e) {
       print("Unsupported operation" + e.toString());
-    } catch (ex) {
-      print(ex);
+    } catch (e) {
+      print(e.toString());
     }
     if (!mounted) return;
+  }
+
+  Future<void> uploadFileWithMetadata(File file) async {
+    // Create your custom metadata.
+    if (file == null) {
+      NullThrownError();
+    }
+    firebase_storage.StorageMetadata metadata =
+        firebase_storage.StorageMetadata(
+      customMetadata: <String, String>{
+        'userId': _kDEmail,
+      },
+    );
+
+    try {
+      await firebase_storage.FirebaseStorage.instance
+          .ref()
+          .child(_kDPhone)
+          .putFile(file, metadata);
+    } on firebase_core.FirebaseException catch (e) {
+      print(e.toString());
+    }
   }
 
   @override
@@ -147,7 +169,7 @@ class _DoctoregState extends State<Doctoreg> {
             ),
             SizedBox(height: 30.0),
             Material(
-              color: Colors.cyan,
+              color: Colors.red[300],
               borderRadius: BorderRadius.circular(5.0),
               child: MaterialButton(
                 onPressed: _openFileExplorer,
@@ -162,14 +184,14 @@ class _DoctoregState extends State<Doctoreg> {
             ),
             SizedBox(height: 30.0),
             Material(
-              color: Colors.cyan,
+              color: Colors.red[300],
               borderRadius: BorderRadius.circular(5.0),
               child: MaterialButton(
                 onPressed: _submit,
                 child: Text(
                   'Register',
                   style: TextStyle(
-                    fontSize: 40,
+                    fontSize: 30,
                     fontWeight: FontWeight.w400,
                   ),
                 ),

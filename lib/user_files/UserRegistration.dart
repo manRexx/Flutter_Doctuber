@@ -165,7 +165,7 @@ class _UserRegistrationState extends State<UserRegistration> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 60.0),
               child: Material(
-                color: Colors.cyan,
+                color: Colors.red[300],
                 borderRadius: BorderRadius.circular(5.0),
                 child: MaterialButton(
                   onPressed: _submit,

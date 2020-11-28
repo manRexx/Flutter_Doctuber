@@ -24,20 +24,29 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.dark(),
+      // theme: ThemeData.light().copyWith(
+      //   primaryColor: Colors.red,
+      //   backgroundColor: Colors.blue,
+      //   accentColor: Colors.yellow[300],
+      //   appBarTheme: AppBarTheme(color: Colors.cyan[300]),
+      // ),
+      theme: ThemeData.dark().copyWith(
+        accentColor: Colors.red,
+        appBarTheme: AppBarTheme(color: Colors.red[300]),
+      ),
       initialRoute: WelcomeScreen.id,
       routes: {
         WelcomeScreen.id: (context) => WelcomeScreen(),
-        Doctoreg.id: (context) => Doctoreg(),
         UserLogin.id: (context) => UserLogin(),
         UserRegistration.id: (context) => UserRegistration(),
-        DoctorLogin.id: (context) => DoctorLogin(),
         User1.id: (context) => User1(),
-        Doctor1.id: (context) => Doctor1(),
-        DLocation.id: (context) => DLocation(),
-        ULocation.id: (context) => ULocation(),
-        DEmergency.id: (context) => DEmergency(),
         UserEmergencyCall.id: (context) => UserEmergencyCall(),
+        ULocation.id: (context) => ULocation(),
+        Doctor1.id: (context) => Doctor1(),
+        Doctoreg.id: (context) => Doctoreg(),
+        DoctorLogin.id: (context) => DoctorLogin(),
+        DLocation.id: (context) => DLocation(),
+        DEmergency.id: (context) => DEmergency(),
         DoctorA.id: (context) => DoctorA(),
       },
     );

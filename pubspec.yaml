@@ -29,7 +29,9 @@ dependencies:
   cloud_firestore: ^0.14.1+3
   google_sign_in: ^4.5.1
   firebase_storage: ^4.0.1
-  file_picker:
+  file_picker: ^2.1.0
+  image_picker: 
+  rflutter_alert: ^1.1.0
 
 dev_dependencies:
   flutter_test:

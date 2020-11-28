@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctorapp/Doctor_files/D_emergency.dart';
+import 'package:doctorapp/Doctor_files/DoctorA.dart';
 import 'package:flutter/material.dart';
-import 'DoctorA.dart';
 import 'package:doctorapp/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
@@ -38,7 +38,7 @@ class _DoctorLoginState extends State<DoctorLogin> {
         _load = true;
       });
       await widget.auth.signInWithEmailAndPassword(_kDEmail, _kDPassword);
-      Navigator.pushNamed(context, DEmergency.id);
+      Navigator.pushNamed(context, DoctorA.id);
       setState(() {
         _load = false;
       });
@@ -103,7 +103,7 @@ class _DoctorLoginState extends State<DoctorLogin> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 100.0),
               child: Material(
-                color: Colors.cyan,
+                color: Colors.red[300],
                 borderRadius: BorderRadius.circular(5.0),
                 child: MaterialButton(
                   onPressed: _submit,
