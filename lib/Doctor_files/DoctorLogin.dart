@@ -1,34 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctorapp/Doctor_files/D_emergency.dart';
+import 'package:doctorapp/Doctor_files/DoctorA.dart';
 import 'package:flutter/material.dart';
 import 'package:doctorapp/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
-
-
 class DoctorLogin extends StatefulWidget {
-  static const String id='DoctorLogin';
+  static const String id = 'DoctorLogin';
   final auth = new Auth();
   @override
   _DoctorLoginState createState() => _DoctorLoginState();
 }
 
 class _DoctorLoginState extends State<DoctorLogin> {
-  
   String get _kDEmail => _dEmailController.text;
   String get _kDPassword => _dPasswordController.text;
   String _kDPhone;
 
-  bool _load=false;
-  final _firestore = Firestore.instance;
-  
+  bool _load = false;
+  final _firestore = FirebaseFirestore.instance;
+
   void getData() async {
-    final messages = await _firestore.collection('doctor_id').getDocuments();
-    for (var message in messages.documents)
-    {
-      if(message.data['user']==_kDEmail)
-      {
-        _kDPhone=message.data['phonenumber'];
+    final messages = await _firestore.collection('doctor_id').get();
+    for (var message in messages.docs) {
+      if (message.data()['user'] == _kDEmail) {
+        _kDPhone = message.data()['phonenumber'];
       }
     }
   }
@@ -36,34 +32,30 @@ class _DoctorLoginState extends State<DoctorLogin> {
   final TextEditingController _dEmailController = TextEditingController();
   final TextEditingController _dPasswordController = TextEditingController();
 
-  void _submit() async
-  {
-     try
-     { 
+  void _submit() async {
+    try {
       setState(() {
-        _load=true;
+        _load = true;
       });
       await widget.auth.signInWithEmailAndPassword(_kDEmail, _kDPassword);
-      Navigator.pushNamed(context, DEmergency.id);
+      Navigator.pushNamed(context, DoctorA.id);
       setState(() {
-        _load=false;
+        _load = false;
       });
-     }catch(e)
-     {
-       print(e.toString());
-     }
+    } catch (e) {
+      print(e.toString());
+    }
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar
-      (
-          title: Text('Doctor App'),
+      appBar: AppBar(
+        title: Text('Doctor App'),
       ),
       body: ModalProgressHUD(
-              inAsyncCall: _load,
-              child: Column(
+        inAsyncCall: _load,
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -74,7 +66,7 @@ class _DoctorLoginState extends State<DoctorLogin> {
                 cursorColor: Colors.amber,
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
-                controller : _dEmailController,
+                controller: _dEmailController,
                 decoration: InputDecoration(
                   hintText: 'Enter your Email',
                   border: OutlineInputBorder(
@@ -87,7 +79,6 @@ class _DoctorLoginState extends State<DoctorLogin> {
                 ),
               ),
             ),
-
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: TextField(
@@ -112,14 +103,16 @@ class _DoctorLoginState extends State<DoctorLogin> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 100.0),
               child: Material(
-                color: Colors.cyan,
+                color: Colors.red[300],
                 borderRadius: BorderRadius.circular(5.0),
                 child: MaterialButton(
                   onPressed: _submit,
-                  child: Text('Login',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                  ),),
+                  child: Text(
+                    'Login',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                    ),
+                  ),
                 ),
               ),
             ),

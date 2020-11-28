@@ -1,12 +1,11 @@
 import 'package:doctorapp/user_files/U_Location.dart';
 import 'package:flutter/material.dart';
-import 'package:doctorapp/services/auth.dart';
+import 'package:doctorapp/services/auth.dart' as auth;
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserLogin extends StatefulWidget {
-  static const String id='UserLogin';
-  final auth = new Auth();
+  static const String id = 'UserLogin';
   @override
   _UserLoginState createState() => _UserLoginState();
 }
@@ -35,37 +34,33 @@ class _UserLoginState extends State<UserLogin> {
   //     }
   //   }
   // }
-  
-  void _submit() async
-  {
-     try
-     { 
+
+  void _submit() async {
+    try {
       setState(() {
-        _load=true;
+        _load = true;
       });
-      await widget.auth.signInWithEmailAndPassword(_kUEmail, _kUPassword);
+      await auth.auth.signInWithEmailAndPassword(_kUEmail, _kUPassword);
       Navigator.pushNamed(context, ULocation.id);
       setState(() {
-        _load=false;
+        _load = false;
       });
-     }catch(e)
-     {
-       print(e.toString());
-     }
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
-  bool _load=false;
+  bool _load = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar
-      (
-          title: Text('User App'),
+      appBar: AppBar(
+        title: Text('User App'),
       ),
       body: ModalProgressHUD(
-          inAsyncCall: _load,
-          child: Column(
+        inAsyncCall: _load,
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -110,18 +105,22 @@ class _UserLoginState extends State<UserLogin> {
                 ),
               ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 100.0),
               child: Material(
-                color: Colors.cyan,
+                color: Colors.red[300],
                 borderRadius: BorderRadius.circular(5.0),
                 child: MaterialButton(
                   onPressed: _submit,
-                  child: Text('Login',
+                  child: Text(
+                    'Login',
                     style: TextStyle(
                       fontSize: 20.0,
-                    ),),
+                    ),
+                  ),
                 ),
               ),
             ),
