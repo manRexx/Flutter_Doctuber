@@ -3,7 +3,7 @@ import 'UserLogin.dart';
 import 'UserRegistration.dart';
 
 class User1 extends StatefulWidget {
-  static const String id='User1';
+  static const String id = 'User1';
   @override
   _User1State createState() => _User1State();
 }
@@ -12,9 +12,8 @@ class _User1State extends State<User1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar
-      (
-          title: Text('User App'),
+      appBar: AppBar(
+        title: Text('User App'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -23,7 +22,7 @@ class _User1State extends State<User1> {
           Container(
             padding: EdgeInsets.all(20.0),
             child: Material(
-              color: Colors.cyan,
+              color: Colors.red[300],
               borderRadius: BorderRadius.circular(5.0),
               child: MaterialButton(
                 onPressed: () {
@@ -44,7 +43,7 @@ class _User1State extends State<User1> {
           Container(
             padding: EdgeInsets.all(20.0),
             child: Material(
-              color: Colors.cyan,
+              color: Colors.red[300],
               borderRadius: BorderRadius.circular(5.0),
               child: MaterialButton(
                 onPressed: () {

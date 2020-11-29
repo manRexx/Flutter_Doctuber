@@ -5,12 +5,11 @@ import 'package:doctorapp/services/auth.dart';
 import 'package:doctorapp/user_files/U_Location.dart';
 
 class UserRegistration extends StatefulWidget {
-  static const String id='UserRegistration';
+  static const String id = 'UserRegistration';
   final auth = new Auth();
   @override
   _UserRegistrationState createState() => _UserRegistrationState();
 }
-
 
 class _UserRegistrationState extends State<UserRegistration> {
   String get _kUEmail => _uEmailController.text;
@@ -19,57 +18,47 @@ class _UserRegistrationState extends State<UserRegistration> {
   String get _kUEmergencyContact => _uEmergencyController.text;
   String get _kUAddress => _uAddressController.text;
 
-  bool _load=false;
-  final _firestore = Firestore.instance;
+  bool _load = false;
+  final _firestore = FirebaseFirestore.instance;
 
-
-  void _submit() async
-  {
-     try
-     { 
+  void _submit() async {
+    try {
       setState(() {
-        _load=true;
+        _load = true;
       });
       print('Alert Emergency Triggered');
       await widget.auth.createUserWithEmailAndPassword(_kUEmail, _kUPassword);
-      _firestore.collection('user_id').add
-      (
-        {
-          'address': _kUAddress,
-          'emergencycontact':_kUEmergencyContact,
-          'phoneno': _kUPhoneNumber,
-          'user': _kUEmail,
-        }
-      );
-      print('User Registered');
-      Navigator.pushNamed(context,ULocation.id);
-      setState(() {
-        _load=false;
+      _firestore.collection('user_id').add({
+        'address': _kUAddress,
+        'emergencycontact': _kUEmergencyContact,
+        'phoneno': _kUPhoneNumber,
+        'user': _kUEmail,
       });
-     }catch(e)
-     {
-       print(e.toString());
-     }
+      print('User Registered');
+      Navigator.pushNamed(context, ULocation.id);
+      setState(() {
+        _load = false;
+      });
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
-  
   final TextEditingController _uEmailController = TextEditingController();
   final TextEditingController _uPasswordController = TextEditingController();
   final TextEditingController _uPhoneController = TextEditingController();
   final TextEditingController _uEmergencyController = TextEditingController();
   final TextEditingController _uAddressController = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar
-      (
-          title: Text('User App'),
+      appBar: AppBar(
+        title: Text('User App'),
       ),
       body: ModalProgressHUD(
-          inAsyncCall: _load,
-          child: Column(
+        inAsyncCall: _load,
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -120,7 +109,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                 cursorColor: Colors.amber,
                 keyboardType: TextInputType.phone,
                 textAlign: TextAlign.center,
-                controller:_uPhoneController,
+                controller: _uPhoneController,
                 decoration: InputDecoration(
                   hintText: 'Enter your Phone number',
                   border: OutlineInputBorder(
@@ -133,8 +122,7 @@ class _UserRegistrationState extends State<UserRegistration> {
                 ),
               ),
             ),
-            Container
-            (
+            Container(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: TextField(
                 autofocus: true,
@@ -177,7 +165,7 @@ class _UserRegistrationState extends State<UserRegistration> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 60.0),
               child: Material(
-                color: Colors.cyan,
+                color: Colors.red[300],
                 borderRadius: BorderRadius.circular(5.0),
                 child: MaterialButton(
                   onPressed: _submit,
