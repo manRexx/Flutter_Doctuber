@@ -1,8 +1,13 @@
 import 'package:doctorapp/user_files/U_Location.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:doctorapp/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:location/location.dart';
+
+final FirebaseAuth auth = FirebaseAuth.instance;
+final _firestore = Firestore.instance;
 
 class UserLogin extends StatefulWidget {
   static const String id='UserLogin';
@@ -36,6 +41,30 @@ class _UserLoginState extends State<UserLogin> {
   //   }
   // }
 
+  void inputData() async {
+
+    final user = await auth.currentUser();
+    final uid = user.uid;
+    // here you write the codes to input the data into firestore
+    print(user.metadata);
+    print('User_ID this: '+uid);
+
+    Location location = new Location();
+    LocationData _locationData;
+
+    _locationData = await location.getLocation();
+
+    await widget.auth.signInWithEmailAndPassword(_kUEmail, _kUPassword);
+    // how to get doc-id rather than hard codding below
+
+    await _firestore.collection('user_id').document('VWAMzcAmkMVESC3RCPrZ').updateData({
+      'latitude':_locationData.latitude,
+      'longitude':_locationData.longitude,
+    });
+
+  }
+
+
   void _submit() async
   {
      try
@@ -43,7 +72,9 @@ class _UserLoginState extends State<UserLogin> {
       setState(() {
         _load=true;
       });
-      await widget.auth.signInWithEmailAndPassword(_kUEmail, _kUPassword);
+
+      await inputData();
+
       Navigator.pushNamed(context, ULocation.id);
       setState(() {
         _load=false;

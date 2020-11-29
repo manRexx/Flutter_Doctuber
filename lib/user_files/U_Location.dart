@@ -30,22 +30,22 @@ class _ULocationState extends State<ULocation> {
           Text(
             'Your Location has been sent and Medical help will soon arrive', textAlign: TextAlign.center,
           ),
-          GoogleMap(
-            onMapCreated: onMapCreated,
-            initialCameraPosition: CameraPosition(
-              target: LatLng(40.6782,-73.9442),
-              zoom: 14.0,
-            ),
-            mapType: MapType.normal,
-          )
+          // GoogleMap(
+          //   onMapCreated: onMapCreated,
+          //   initialCameraPosition: CameraPosition(
+          //     target: LatLng(40.6782,-73.9442),
+          //     zoom: 14.0,
+          //   ),
+          //   mapType: MapType.normal,
+          // ),
         ],
       ),
     );
   }
 
-  void onMapCreated(GoogleMapController controller){
-    setState(() {
-      _controller=controller;
-    });
-  }
-}
+//   void onMapCreated(GoogleMapController controller){
+//     setState(() {
+//       _controller=controller;
+//     });
+//   }
+ }

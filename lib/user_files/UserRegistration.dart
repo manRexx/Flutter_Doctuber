@@ -3,6 +3,7 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctorapp/services/auth.dart';
 import 'package:doctorapp/user_files/U_Location.dart';
+import 'package:location/location.dart';
 
 import 'UserLogin.dart';
 
@@ -22,7 +23,7 @@ class _UserRegistrationState extends State<UserRegistration> {
   String get _kUAddress => _uAddressController.text;
 
   bool _load=false;
-  final _firestore = Firestore.instance;
+    final _firestore = Firestore.instance;
 
 
   void _submit() async
@@ -33,16 +34,47 @@ class _UserRegistrationState extends State<UserRegistration> {
         _load=true;
       });
       print('Alert Emergency Triggered');
+
+      Location location = new Location();
+
+      bool _serviceEnabled;
+      PermissionStatus _permissionGranted;
+      LocationData _locationData;
+
+      _serviceEnabled = await location.serviceEnabled();
+      if (!_serviceEnabled) {
+        _serviceEnabled = await location.requestService();
+        if (!_serviceEnabled) {
+          return;
+        }
+      }
+
+      _permissionGranted = await location.hasPermission();
+      if (_permissionGranted == PermissionStatus.denied) {
+        _permissionGranted = await location.requestPermission();
+        if (_permissionGranted != PermissionStatus.granted) {
+          return;
+        }
+      }
+
+      _locationData = await location.getLocation();
+      print(_locationData);
+      print(_locationData.longitude);
+      print(_locationData.latitude);
+
       await widget.auth.createUserWithEmailAndPassword(_kUEmail, _kUPassword);
-      _firestore.collection('user_id').add
+      final docRef=_firestore.collection('user_id').add
       (
         {
           'address': _kUAddress,
           'emergencycontact':_kUEmergencyContact,
           'phoneno': _kUPhoneNumber,
           'user': _kUEmail,
+          'latitude':_locationData.latitude,
+          'longitude':_locationData.longitude,
         }
       );
+
       print('User Registered');
 
       // should be pushNamed to UserLogin
@@ -57,7 +89,7 @@ class _UserRegistrationState extends State<UserRegistration> {
      }
   }
 
-  
+
   final TextEditingController _uEmailController = TextEditingController();
   final TextEditingController _uPasswordController = TextEditingController();
   final TextEditingController _uPhoneController = TextEditingController();
