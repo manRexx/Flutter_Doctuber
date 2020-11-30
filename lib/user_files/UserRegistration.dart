@@ -1,3 +1,4 @@
+import 'package:doctorapp/user_files/UserLogin.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -6,7 +7,6 @@ import 'package:doctorapp/user_files/U_Location.dart';
 
 class UserRegistration extends StatefulWidget {
   static const String id = 'UserRegistration';
-  final auth = new Auth();
   @override
   _UserRegistrationState createState() => _UserRegistrationState();
 }
@@ -27,7 +27,7 @@ class _UserRegistrationState extends State<UserRegistration> {
         _load = true;
       });
       print('Alert Emergency Triggered');
-      await widget.auth.createUserWithEmailAndPassword(_kUEmail, _kUPassword);
+      await auth.createUserWithEmailAndPassword(_kUEmail, _kUPassword);
       _firestore.collection('user_id').add({
         'address': _kUAddress,
         'emergencycontact': _kUEmergencyContact,

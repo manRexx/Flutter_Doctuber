@@ -16,48 +16,7 @@ class Doctoreg extends StatefulWidget {
 }
 
 class _DoctoregState extends State<Doctoreg> {
-  final TextEditingController _dEmailController = TextEditingController();
-  final TextEditingController _dPasswordController = TextEditingController();
-  final TextEditingController _dPhoneController = TextEditingController();
-
-  bool _load = false;
-  String userType;
   FilePickerResult _paths;
-  final _firestore = FirebaseFirestore.instance;
-
-  String get _kDEmail => _dEmailController.text;
-  String get _kDPassword => _dPasswordController.text;
-  String get _kDPhone => _dPhoneController.text;
-
-  void _submit() async {
-    try {
-      setState(() {
-        _load = true;
-      });
-      print('Alert Emergency Triggered');
-      await auth.auth.createUserWithEmailAndPassword(_kDEmail, _kDPassword);
-      _firestore.collection('doctor_id').add({
-        'phonenumber': _kDPhone,
-        'user': _kDEmail,
-      });
-      if (_paths != null) {
-        File filePath = File(_paths.files.first.path);
-        uploadFileWithMetadata(filePath);
-      }
-      Navigator.pushNamed(context, DoctorA.id);
-      setState(() {
-        _load = false;
-      });
-    } catch (e) {
-      print(e.toString());
-    }
-  }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  // }
-
   void _openFileExplorer() async {
     try {
       _paths = (await FilePicker.platform.pickFiles(
@@ -81,31 +40,73 @@ class _DoctoregState extends State<Doctoreg> {
     firebase_storage.StorageMetadata metadata =
         firebase_storage.StorageMetadata(
       customMetadata: <String, String>{
-        'userId': _kDEmail,
+        'userId': _kUEmail,
       },
     );
 
     try {
       await firebase_storage.FirebaseStorage.instance
           .ref()
-          .child(_kDPhone)
+          .child(_kUPhoneNumber)
           .putFile(file, metadata);
     } on firebase_core.FirebaseException catch (e) {
       print(e.toString());
     }
   }
 
+  String get _kUEmail => _uEmailController.text;
+  String get _kUPassword => _uPasswordController.text;
+  String get _kUPhoneNumber => _uPhoneController.text;
+  String get _kUName => _uNameController.text;
+  String get _kUAddress => _uAddressController.text;
+
+  bool _load = false;
+  final _firestore = FirebaseFirestore.instance;
+
+  void _submit() async {
+    try {
+      setState(() {
+        _load = true;
+      });
+      print('Alert Emergency Triggered');
+      await auth.auth.createUserWithEmailAndPassword(_kUEmail, _kUPassword);
+      _firestore.collection('doctor_id').add({
+        'address': _kUAddress,
+        'Name': _kUName,
+        'phoneno': _kUPhoneNumber,
+        'email': _kUEmail,
+      });
+      if (_paths != null) {
+        File filePath = File(_paths.files.first.path);
+        uploadFileWithMetadata(filePath);
+      }
+      print('User Registered');
+      Navigator.pushNamed(context, DoctorA.id);
+      setState(() {
+        _load = false;
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  final TextEditingController _uEmailController = TextEditingController();
+  final TextEditingController _uPasswordController = TextEditingController();
+  final TextEditingController _uPhoneController = TextEditingController();
+  final TextEditingController _uNameController = TextEditingController();
+  final TextEditingController _uAddressController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Doctor App'),
+        title: Text('User App'),
       ),
       body: ModalProgressHUD(
         inAsyncCall: _load,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
               padding: EdgeInsets.all(20.0),
@@ -114,7 +115,7 @@ class _DoctoregState extends State<Doctoreg> {
                 cursorColor: Colors.amber,
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.center,
-                controller: _dEmailController,
+                controller: _uEmailController,
                 decoration: InputDecoration(
                   hintText: 'Enter your Email',
                   border: OutlineInputBorder(
@@ -134,7 +135,7 @@ class _DoctoregState extends State<Doctoreg> {
                 cursorColor: Colors.amber,
                 obscureText: true,
                 textAlign: TextAlign.center,
-                controller: _dPasswordController,
+                controller: _uPasswordController,
                 decoration: InputDecoration(
                   hintText: 'Enter your Password',
                   border: OutlineInputBorder(
@@ -152,11 +153,11 @@ class _DoctoregState extends State<Doctoreg> {
               child: TextField(
                 autofocus: true,
                 cursorColor: Colors.amber,
+                keyboardType: TextInputType.phone,
                 textAlign: TextAlign.center,
-                controller: _dPhoneController,
-                keyboardType: TextInputType.number,
+                controller: _uPhoneController,
                 decoration: InputDecoration(
-                  hintText: 'Enter your Phone Number',
+                  hintText: 'Enter your Phone number',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5.0),
                     borderSide: BorderSide(
@@ -167,32 +168,76 @@ class _DoctoregState extends State<Doctoreg> {
                 ),
               ),
             ),
-            SizedBox(height: 30.0),
-            Material(
-              color: Colors.red[300],
-              borderRadius: BorderRadius.circular(5.0),
-              child: MaterialButton(
-                onPressed: _openFileExplorer,
-                child: Text(
-                  'Upload Certificate',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w400,
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: TextField(
+                autofocus: true,
+                cursorColor: Colors.amber,
+                keyboardType: TextInputType.emailAddress,
+                textAlign: TextAlign.center,
+                controller: _uNameController,
+                decoration: InputDecoration(
+                  hintText: 'Enter your Name',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                    borderSide: BorderSide(
+                      color: Colors.amber,
+                      style: BorderStyle.solid,
+                    ),
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 30.0),
-            Material(
-              color: Colors.red[300],
-              borderRadius: BorderRadius.circular(5.0),
-              child: MaterialButton(
-                onPressed: _submit,
-                child: Text(
-                  'Register',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w400,
+            Container(
+              padding: EdgeInsets.all(20.0),
+              child: TextField(
+                autofocus: true,
+                cursorColor: Colors.amber,
+                keyboardType: TextInputType.emailAddress,
+                textAlign: TextAlign.center,
+                controller: _uAddressController,
+                decoration: InputDecoration(
+                  hintText: 'Enter your Address',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                    borderSide: BorderSide(
+                      color: Colors.amber,
+                      style: BorderStyle.solid,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 60.0),
+              child: Material(
+                color: Colors.red[300],
+                borderRadius: BorderRadius.circular(5.0),
+                child: MaterialButton(
+                  onPressed: _openFileExplorer,
+                  child: Text(
+                    'Upload File Explorer',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 60.0),
+              child: Material(
+                color: Colors.red[300],
+                borderRadius: BorderRadius.circular(5.0),
+                child: MaterialButton(
+                  onPressed: _submit,
+                  child: Text(
+                    'Register',
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
               ),

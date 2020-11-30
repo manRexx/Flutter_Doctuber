@@ -23,10 +23,9 @@ class _DEmergencyState extends State<DEmergency> {
                 Navigator.pushNamed(context, DoctorA.id);
               },
               child: Text(
-                'LOG-OUT',
+                'Log Out',
                 style: TextStyle(
                   color: Colors.white,
-                  //backgroundColor: Colors.red,
                   fontSize: 20.0,
                 ),
               ),

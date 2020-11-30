@@ -11,7 +11,6 @@ import 'Doctor_files/Doctoreg.dart';
 import 'user_files/UserRegistration.dart';
 import 'Doctor_files/Doctor1.dart';
 import 'user_files/UserEmergencyCall.dart';
-import 'user_files/User1.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
@@ -39,7 +38,6 @@ class App extends StatelessWidget {
         WelcomeScreen.id: (context) => WelcomeScreen(),
         UserLogin.id: (context) => UserLogin(),
         UserRegistration.id: (context) => UserRegistration(),
-        User1.id: (context) => User1(),
         UserEmergencyCall.id: (context) => UserEmergencyCall(),
         ULocation.id: (context) => ULocation(),
         Doctor1.id: (context) => Doctor1(),

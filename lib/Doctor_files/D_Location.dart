@@ -23,10 +23,9 @@ class _DLocationState extends State<DLocation> {
                 Navigator.pop(context);
               },
               child: Text(
-                'LOG-OUT',
+                'Log Out',
                 style: TextStyle(
-                  color: Colors.black,
-                  backgroundColor: Colors.red,
+                  color: Colors.white,
                   fontSize: 20.0,
                 ),
               ),
