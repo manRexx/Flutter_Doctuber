@@ -1,3 +1,5 @@
+import 'package:doctorapp/Doctor_files/DoctorCard.dart';
+import 'package:doctorapp/Doctor_files/DoctorCardList.dart';
 import 'package:doctorapp/user_files/U_Location.dart';
 import 'package:flutter/material.dart';
 import 'package:doctorapp/services/auth.dart' as auth;
@@ -41,7 +43,7 @@ class _UserLoginState extends State<UserLogin> {
         _load = true;
       });
       await auth.auth.signInWithEmailAndPassword(_kUEmail, _kUPassword);
-      Navigator.pushNamed(context, ULocation.id);
+      Navigator.pushNamed(context, DoctorList.id);
       setState(() {
         _load = false;
       });

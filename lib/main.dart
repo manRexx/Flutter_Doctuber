@@ -1,4 +1,5 @@
 import 'package:doctorapp/Doctor_files/DoctorA.dart';
+import 'package:doctorapp/Doctor_files/DoctorCardList.dart';
 import 'Doctor_files/DoctorA.dart';
 import 'Doctor_files/D_Location.dart';
 import 'Doctor_files/D_emergency.dart';
@@ -46,6 +47,7 @@ class App extends StatelessWidget {
         DLocation.id: (context) => DLocation(),
         DEmergency.id: (context) => DEmergency(),
         DoctorA.id: (context) => DoctorA(),
+        DoctorList.id: (context) => DoctorList(),
       },
     );
   }

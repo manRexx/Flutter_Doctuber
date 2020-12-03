@@ -1,3 +1,4 @@
+import 'package:doctorapp/Doctor_files/DoctorCardList.dart';
 import 'package:doctorapp/user_files/UserLogin.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -35,7 +36,7 @@ class _UserRegistrationState extends State<UserRegistration> {
         'user': _kUEmail,
       });
       print('User Registered');
-      Navigator.pushNamed(context, ULocation.id);
+      Navigator.pushNamed(context, UserLogin.id);
       setState(() {
         _load = false;
       });

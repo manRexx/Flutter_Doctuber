@@ -72,7 +72,7 @@ class _DoctoregState extends State<Doctoreg> {
       await auth.auth.createUserWithEmailAndPassword(_kUEmail, _kUPassword);
       _firestore.collection('doctor_id').add({
         'address': _kUAddress,
-        'Name': _kUName,
+        'name': _kUName,
         'phoneno': _kUPhoneNumber,
         'email': _kUEmail,
       });
@@ -81,10 +81,10 @@ class _DoctoregState extends State<Doctoreg> {
         uploadFileWithMetadata(filePath);
       }
       print('User Registered');
-      Navigator.pushNamed(context, DoctorA.id);
       setState(() {
         _load = false;
       });
+      Navigator.pushNamed(context, DoctorA.id);
     } catch (e) {
       print(e.toString());
     }
@@ -209,14 +209,14 @@ class _DoctoregState extends State<Doctoreg> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 60.0),
+              padding: EdgeInsets.symmetric(horizontal: 60, vertical: 20),
               child: Material(
                 color: Colors.red[300],
                 borderRadius: BorderRadius.circular(5.0),
                 child: MaterialButton(
                   onPressed: _openFileExplorer,
                   child: Text(
-                    'Upload File Explorer',
+                    'Upload File For Verification',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w400,
