@@ -20,11 +20,11 @@ class _DoctorLoginState extends State<DoctorLogin> {
   bool _load = false;
   final _firestore = FirebaseFirestore.instance;
 
-  void getData() async {
+  Future<void> getData() async {
     final messages = await _firestore.collection('doctor_id').get();
     for (var message in messages.docs) {
-      if (message.data()['user'] == _kDEmail) {
-        _kDPhone = message.data()['phonenumber'];
+      if (message.data()['email'] == _kDEmail) {
+        _kDPhone = message.data()['phoneno'];
       }
     }
   }
@@ -38,7 +38,8 @@ class _DoctorLoginState extends State<DoctorLogin> {
         _load = true;
       });
       await widget.auth.signInWithEmailAndPassword(_kDEmail, _kDPassword);
-      Navigator.pushNamed(context, DoctorA.id);
+      await getData();
+      Navigator.pushNamed(context, DoctorA.id, arguments: _kDPhone);
       setState(() {
         _load = false;
       });

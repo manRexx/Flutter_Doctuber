@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'D_emergency.dart';
 import 'package:doctorapp/services/auth.dart' as auth;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DoctorA extends StatefulWidget {
   static const String id = 'DoctorA';
@@ -9,8 +10,21 @@ class DoctorA extends StatefulWidget {
 }
 
 class _DoctorAState extends State<DoctorA> {
+  CollectionReference users =
+      FirebaseFirestore.instance.collection('doctor_id');
+
   @override
   Widget build(BuildContext context) {
+    final String args = ModalRoute.of(context).settings.arguments;
+    print(args);
+    Future<void> updateUser() {
+      return users
+          .doc(args)
+          .update({'isAvailable': true})
+          .then((value) => print("User Updated"))
+          .catchError((error) => print("Failed to update user: $error"));
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -22,6 +36,7 @@ class _DoctorAState extends State<DoctorA> {
             child: MaterialButton(
               onPressed: () {
                 auth.auth.signOut();
+                Navigator.pop(context);
               },
               child: Text(
                 'Log Out',
@@ -59,8 +74,8 @@ class _DoctorAState extends State<DoctorA> {
                   borderRadius: BorderRadius.circular(5.0),
                   child: MaterialButton(
                     onPressed: () {
-                      setState(() {});
-                      print('Alert Emergency Triggerd');
+                      print('Alert Emergency Triggered');
+                      updateUser();
                       Navigator.pushNamed(context, DEmergency.id);
                     },
                     child: Text(

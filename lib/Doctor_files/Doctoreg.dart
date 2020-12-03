@@ -59,6 +59,7 @@ class _DoctoregState extends State<Doctoreg> {
   String get _kUPhoneNumber => _uPhoneController.text;
   String get _kUName => _uNameController.text;
   String get _kUAddress => _uAddressController.text;
+  bool _uAvailable = false;
 
   bool _load = false;
   final _firestore = FirebaseFirestore.instance;
@@ -70,21 +71,22 @@ class _DoctoregState extends State<Doctoreg> {
       });
       print('Alert Emergency Triggered');
       await auth.auth.createUserWithEmailAndPassword(_kUEmail, _kUPassword);
-      _firestore.collection('doctor_id').add({
+      _firestore.collection('doctor_id').doc(_kUPhoneNumber).set({
         'address': _kUAddress,
         'name': _kUName,
         'phoneno': _kUPhoneNumber,
         'email': _kUEmail,
+        "isAvailable": _uAvailable,
       });
       if (_paths != null) {
         File filePath = File(_paths.files.first.path);
         uploadFileWithMetadata(filePath);
       }
-      print('User Registered');
+      print('Doctor Registered');
       setState(() {
         _load = false;
       });
-      Navigator.pushNamed(context, DoctorA.id);
+      Navigator.pushNamed(context, DoctorA.id, arguments: _kUPhoneNumber);
     } catch (e) {
       print(e.toString());
     }
@@ -100,7 +102,7 @@ class _DoctoregState extends State<Doctoreg> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('User App'),
+        title: Text('Doctor App'),
       ),
       body: ModalProgressHUD(
         inAsyncCall: _load,

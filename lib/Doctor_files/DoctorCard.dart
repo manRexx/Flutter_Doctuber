@@ -43,19 +43,19 @@ class DoctorCard extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'Phone No: ',
+                      'Name: ',
                       style: doctorCardHeading,
                     ),
-                    Text('$phonenumber', style: doctorCardText),
+                    Text('$name', style: doctorCardText),
                   ],
                 ),
                 Row(
                   children: [
                     Text(
-                      'Name: ',
+                      'Phone No: ',
                       style: doctorCardHeading,
                     ),
-                    Text('$name', style: doctorCardText),
+                    Text('$phonenumber', style: doctorCardText),
                   ],
                 ),
                 Row(
