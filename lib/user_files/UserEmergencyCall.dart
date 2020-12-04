@@ -1,3 +1,4 @@
+import 'package:doctorapp/user_files/DoctorCardList.dart';
 import 'package:flutter/material.dart';
 import 'package:doctorapp/user_files/U_Location.dart';
 
@@ -35,11 +36,19 @@ class _UserEmergencyCallState extends State<UserEmergencyCall> {
       body: Column(
         children: <Widget>[
           Container(
+            padding: EdgeInsets.all(20),
+            child: Text(
+              'Please Tap the image to get a doctor\'s list',
+              style: TextStyle(fontSize: 20),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Container(
             child: MaterialButton(
               onPressed: () {
                 print('Alert Emergency Triggered');
                 setState(() {});
-                Navigator.pushNamed(context, ULocation.id);
+                Navigator.pushNamed(context, DoctorList.id);
               },
               child: Image.asset(
                 'images/Emergency1.png',

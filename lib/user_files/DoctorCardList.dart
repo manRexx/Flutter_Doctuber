@@ -1,4 +1,4 @@
-import 'package:doctorapp/Doctor_files/DoctorCard.dart';
+import 'package:doctorapp/user_files/DoctorCard.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctorapp/services/auth.dart';
@@ -42,14 +42,6 @@ class _DoctorListState extends State<DoctorList> {
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasError) {
               return Text('Something went wrong');
-            }
-            if (!snapshot.hasData) {
-              return Container(
-                child: SpinKitCircle(
-                  color: Colors.white,
-                  size: 50.0,
-                ),
-              );
             }
             print(snapshot.connectionState);
             if (snapshot.connectionState == ConnectionState.waiting) {

@@ -1,5 +1,5 @@
 import 'package:doctorapp/Doctor_files/DoctorA.dart';
-import 'package:doctorapp/Doctor_files/DoctorCardList.dart';
+import 'package:doctorapp/user_files/DoctorCardList.dart';
 import 'Doctor_files/DoctorA.dart';
 import 'Doctor_files/D_Location.dart';
 import 'Doctor_files/D_emergency.dart';
@@ -24,12 +24,6 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // theme: ThemeData.light().copyWith(
-      //   primaryColor: Colors.red,
-      //   backgroundColor: Colors.blue,
-      //   accentColor: Colors.yellow[300],
-      //   appBarTheme: AppBarTheme(color: Colors.cyan[300]),
-      // ),
       theme: ThemeData.dark().copyWith(
         accentColor: Colors.red,
         appBarTheme: AppBarTheme(color: Colors.red[300]),

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:doctorapp/Doctor_files/DoctorA.dart';
+import 'package:doctorapp/services/Location.dart' as location;
 import 'package:flutter/material.dart';
 import 'package:doctorapp/services/auth.dart' as auth;
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -71,12 +72,16 @@ class _DoctoregState extends State<Doctoreg> {
       });
       print('Alert Emergency Triggered');
       await auth.auth.createUserWithEmailAndPassword(_kUEmail, _kUPassword);
+      location.Location userLoc = await location.location.getCurrentLocation();
+
       _firestore.collection('doctor_id').doc(_kUPhoneNumber).set({
         'address': _kUAddress,
         'name': _kUName,
         'phoneno': _kUPhoneNumber,
         'email': _kUEmail,
         "isAvailable": _uAvailable,
+        "longitude": userLoc.kLongitude,
+        "latitude": userLoc.kLatitude,
       });
       if (_paths != null) {
         File filePath = File(_paths.files.first.path);

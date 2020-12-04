@@ -39,7 +39,7 @@ class _DLocationState extends State<DLocation> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Your Location is being sent and if an urgency pops up, we will contact you',
+              'Your Location has been shared and if an urgency pops up, we will contact you',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 20),
             ),

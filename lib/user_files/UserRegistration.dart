@@ -1,5 +1,6 @@
-import 'package:doctorapp/Doctor_files/DoctorCardList.dart';
+import 'package:doctorapp/user_files/DoctorCardList.dart';
 import 'package:doctorapp/user_files/UserLogin.dart';
+import 'package:doctorapp/services/Location.dart' as location;
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,6 +21,7 @@ class _UserRegistrationState extends State<UserRegistration> {
   String get _kUAddress => _uAddressController.text;
   String get _kUName => _uNameController.text;
   bool _load = false;
+  bool _uVain = false;
   final _firestore = FirebaseFirestore.instance;
 
   void _submit() async {
@@ -29,12 +31,16 @@ class _UserRegistrationState extends State<UserRegistration> {
       });
       print('Alert Emergency Triggered');
       await auth.createUserWithEmailAndPassword(_kUEmail, _kUPassword);
+      location.Location userLoc = await location.location.getCurrentLocation();
       _firestore.collection('user_id').doc(_kUPhoneNumber).set({
         'address': _kUAddress,
         'emergencycontact': _kUEmergencyContact,
         'phoneno': _kUPhoneNumber,
         'email': _kUEmail,
         'name': _kUName,
+        'latitude': userLoc.kLatitude,
+        'longitude': userLoc.kLongitude,
+        'isInVain': _uVain,
       });
       print('User Registered');
       Navigator.pushNamed(context, UserLogin.id);
