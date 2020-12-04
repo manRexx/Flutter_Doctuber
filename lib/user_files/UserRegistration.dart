@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -17,9 +19,13 @@ class _UserRegistrationState extends State<UserRegistration> {
   String get _kUPhoneNumber => _uPhoneController.text;
   String get _kUEmergencyContact => _uEmergencyController.text;
   String get _kUAddress => _uAddressController.text;
+  var lat=0.0;
+  var long=0.0;
 
   bool _load = false;
   final _firestore = FirebaseFirestore.instance;
+
+  String userID =auth.firebaseAuth.currentUser.uid;
 
   void _submit() async {
     try {
@@ -27,12 +33,20 @@ class _UserRegistrationState extends State<UserRegistration> {
         _load = true;
       });
       print('Alert Emergency Triggered');
-      await widget.auth.createUserWithEmailAndPassword(_kUEmail, _kUPassword);
+      print('Amoeba');
+      print(auth.hashCode);
+      print(userID);
+      var info=await auth.createUserWithEmailAndPassword(_kUEmail, _kUPassword);
+      print('This is uid from User Registeration');
+      print(info.uid);
       _firestore.collection('user_id').add({
         'address': _kUAddress,
         'emergencycontact': _kUEmergencyContact,
         'phoneno': _kUPhoneNumber,
         'user': _kUEmail,
+        'latitude':lat,
+        'longitude':long,
+        'author':info.uid
       });
       print('User Registered');
       Navigator.pushNamed(context, ULocation.id);
@@ -183,5 +197,10 @@ class _UserRegistrationState extends State<UserRegistration> {
         ),
       ),
     );
+  }
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('FirebaseUser', FirebaseUser));
   }
 }

@@ -2,7 +2,9 @@ import 'package:doctorapp/user_files/U_Location.dart';
 import 'package:flutter/material.dart';
 import 'package:doctorapp/services/auth.dart' as auth;
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:location/location.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+String apnaref;
 
 class UserLogin extends StatefulWidget {
   static const String id = 'UserLogin';
@@ -35,12 +37,70 @@ class _UserLoginState extends State<UserLogin> {
   //   }
   // }
 
+  Future inputData() async {
+
+    final user = await auth.auth.currentUser();
+    final uid = user.uid;
+    // here you write the codes to input the data into firestore
+    print(uid);
+    String u=auth.auth.firebaseAuth.currentUser.uid;
+    print('User_ID this: '+uid);
+    print('new uid is '+u);
+
+    Location location = new Location();
+    LocationData _locationData;
+
+    _locationData = await location.getLocation();
+    print('Location Information is this');
+    print(_locationData.longitude);
+    print(_locationData.latitude);
+
+    // await widget.auth.signInWithEmailAndPassword(_kUEmail, _kUPassword);
+    // how to get doc-id rather than hard codding below
+    final _firestore = FirebaseFirestore.instance;
+
+    // await _firestore.collection('user_id').document('VWAMzcAmkMVESC3RCPrZ').updateData({
+    //   'latitude':_locationData.latitude,
+    //   'longitude':_locationData.longitude,
+    // });
+
+    final QuerySnapshot result = await _firestore.collection('user_id').get();
+    final List<DocumentSnapshot> documents = result.docs;
+    documents.forEach((data) => print(data.get('user')+' & '+data.reference.id));
+    // documents.forEach((data) {
+    //   if (data.get('author').toString().toLowerCase()==uid.toString().toLowerCase()) {
+    //     print(data.get('author'));
+    //   }
+    // });
+    var index;
+    var count=0;
+    void processingFunction(DocumentSnapshot element){
+      if(element.get('author')==uid){
+        index=count;
+      }
+      count++;
+    }
+    documents.forEach((element) =>
+      processingFunction(element)
+    );
+    print(count);
+
+    print('ye hai apna reference '+apnaref);
+
+    await _firestore.collection('user_id').doc(apnaref).update({
+      'latitude':_locationData.latitude,
+      'longitude':_locationData.longitude
+    });
+
+  }
+
   void _submit() async {
     try {
       setState(() {
         _load = true;
       });
       await auth.auth.signInWithEmailAndPassword(_kUEmail, _kUPassword);
+      await inputData();
       Navigator.pushNamed(context, ULocation.id);
       setState(() {
         _load = false;

@@ -17,7 +17,7 @@ abstract class AuthBase {
 }
 
 class Auth implements AuthBase {
-  final _firebaseAuth = firebase_auth.FirebaseAuth.instance;
+  final firebaseAuth = firebase_auth.FirebaseAuth.instance;
 
   // ignore: deprecated_member_use
   User _userFromFirebase(firebase_auth.User user) {
@@ -26,16 +26,22 @@ class Auth implements AuthBase {
     }
     return User(uid: user.uid);
   }
+  String uman(firebase_auth.User u){
+    if (u == null) {
+     return null;
+    }
+    return u.uid;
+  }
 
   @override
   Stream<User> get onAuthStateChanged {
     // ignore: deprecated_member_use
-    return _firebaseAuth.onAuthStateChanged.map(_userFromFirebase);
+    return firebaseAuth.onAuthStateChanged.map(_userFromFirebase);
   }
 
   @override
   Future<User> currentUser() async {
-    final user = await _firebaseAuth.currentUser;
+    final user = await firebaseAuth.currentUser;
     return _userFromFirebase(user);
   }
 
@@ -48,7 +54,7 @@ class Auth implements AuthBase {
 
   @override
   Future<User> signInWithEmailAndPassword(String email, String password) async {
-    final authResult = await _firebaseAuth.signInWithEmailAndPassword(
+    final authResult = await firebaseAuth.signInWithEmailAndPassword(
         email: email, password: password);
     return _userFromFirebase(authResult.user);
   }
@@ -56,7 +62,7 @@ class Auth implements AuthBase {
   @override
   Future<User> createUserWithEmailAndPassword(
       String email, String password) async {
-    final authResult = await _firebaseAuth.createUserWithEmailAndPassword(
+    final authResult = await firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password);
     return _userFromFirebase(authResult.user);
   }
@@ -103,7 +109,7 @@ class Auth implements AuthBase {
   }*/
   @override
   Future<void> signOut() async {
-    await _firebaseAuth.signOut();
+    await firebaseAuth.signOut();
   }
 }
 
