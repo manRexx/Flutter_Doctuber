@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'D_emergency.dart';
 import 'package:doctorapp/services/auth.dart' as auth;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:doctorapp/services/Location.dart' as location;
 
 class DoctorA extends StatefulWidget {
   static const String id = 'DoctorA';
@@ -9,8 +11,36 @@ class DoctorA extends StatefulWidget {
 }
 
 class _DoctorAState extends State<DoctorA> {
+  CollectionReference users =
+      FirebaseFirestore.instance.collection('doctor_id');
+
   @override
   Widget build(BuildContext context) {
+    final String args = ModalRoute.of(context).settings.arguments;
+    print(args);
+    Future<void> updateDoctorYes() async {
+      location.Location userLoc = await location.location.getCurrentLocation();
+      return users
+          .doc(args)
+          .update({
+            'isAvailable': true,
+            'longitude': userLoc.kLongitude,
+            'latitude': userLoc.kLatitude,
+          })
+          .then((value) => print("User Updated"))
+          .catchError((error) => print("Failed to update user: $error"));
+    }
+
+    Future<void> updateDoctorNo() async {
+      return users
+          .doc(args)
+          .update({
+            'isAvailable': false,
+          })
+          .then((value) => print("User Updated"))
+          .catchError((error) => print("Failed to update user: $error"));
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -22,6 +52,7 @@ class _DoctorAState extends State<DoctorA> {
             child: MaterialButton(
               onPressed: () {
                 auth.auth.signOut();
+                Navigator.pop(context);
               },
               child: Text(
                 'Log Out',
@@ -58,9 +89,9 @@ class _DoctorAState extends State<DoctorA> {
                   color: Colors.red[300],
                   borderRadius: BorderRadius.circular(5.0),
                   child: MaterialButton(
-                    onPressed: () {
-                      setState(() {});
-                      print('Alert Emergency Triggerd');
+                    onPressed: () async {
+                      print('Alert Emergency Triggered');
+                      await updateDoctorYes();
                       Navigator.pushNamed(context, DEmergency.id);
                     },
                     child: Text(
@@ -79,8 +110,9 @@ class _DoctorAState extends State<DoctorA> {
                   color: Colors.red[300],
                   borderRadius: BorderRadius.circular(5.0),
                   child: MaterialButton(
-                    onPressed: () {
+                    onPressed: () async {
                       setState(() {});
+                      await updateDoctorNo();
                       print('Alert Emergency Triggerd');
                       Navigator.pop(context);
                     },

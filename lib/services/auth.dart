@@ -9,6 +9,7 @@ class User {
 abstract class AuthBase {
   Stream<User> get onAuthStateChanged;
   Future<User> currentUser();
+  Future<String> emailFromFirebase();
   //Future<User> signInAnonymously();
   //Future<User> signInWithGoogle();
   Future<User> signInWithEmailAndPassword(String email, String password);
@@ -29,18 +30,24 @@ class Auth implements AuthBase {
 
   @override
   Stream<User> get onAuthStateChanged {
-    // ignore: deprecated_member_use
-    return _firebaseAuth.onAuthStateChanged.map(_userFromFirebase);
+    return _firebaseAuth.authStateChanges().map(_userFromFirebase);
   }
 
   @override
   Future<User> currentUser() async {
+    // ignore: await_only_futures
     final user = await _firebaseAuth.currentUser;
     return _userFromFirebase(user);
   }
 
-  @override
-  /*Future<User> signInAnonymously() async
+  Future<String> emailFromFirebase() async {
+    // ignore: await_only_futures
+    final user = await _firebaseAuth.currentUser;
+    return user.email;
+  }
+
+  /*@override
+  Future<User> signInAnonymously() async
   {
     final authResult = await _firebaseAuth.signInAnonymously();
     return _userFromFirebase(authResult.user);

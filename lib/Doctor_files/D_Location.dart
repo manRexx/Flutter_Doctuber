@@ -1,4 +1,3 @@
-import 'package:doctorapp/Doctor_files/DoctorA.dart';
 import 'package:flutter/material.dart';
 import 'package:doctorapp/services/auth.dart' as auth;
 
@@ -23,10 +22,9 @@ class _DLocationState extends State<DLocation> {
                 Navigator.pop(context);
               },
               child: Text(
-                'LOG-OUT',
+                'Log Out',
                 style: TextStyle(
-                  color: Colors.black,
-                  backgroundColor: Colors.red,
+                  color: Colors.white,
                   fontSize: 20.0,
                 ),
               ),
@@ -40,7 +38,7 @@ class _DLocationState extends State<DLocation> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Your Location is being sent and if an urgency pops up, we will contact you',
+              'Your Location has been shared and if an urgency pops up, we will contact you',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 20),
             ),

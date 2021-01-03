@@ -1,31 +1,24 @@
-import 'package:geolocator/geolocator.dart';
+import 'package:geolocator/geolocator.dart' as geolocator;
 
 class Location {
   double kLatitude;
   double kLongitude;
 
-  Future<void> getCurrentLocation() async {
+  // ignore: missing_return
+  Future<Location> getCurrentLocation() async {
     try {
-      Position kPosition = await Geolocator()
-          .getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+      geolocator.Position kPosition = await geolocator.Geolocator()
+          .getCurrentPosition(
+              desiredAccuracy: geolocator.LocationAccuracy.best);
 
-      kLatitude = kPosition.latitude;
-      kLongitude = kPosition.longitude;
+      location.kLatitude = kPosition.latitude;
+      location.kLongitude = kPosition.longitude;
+
+      return location;
     } catch (e) {
-      print(e);
+      print(e.toString());
     }
   }
 }
-Future<Location> getLocation(Location location) async {
-    await location.getCurrentLocation();
-    return location;  
-  }
 
-double getLocationLongitude(Location location)
-{
-  return location.kLongitude;
-}
-double getLocationLatitude(Location location)
-{
-  return location.kLatitude;
-}
+Location location = new Location();

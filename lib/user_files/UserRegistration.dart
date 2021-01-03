@@ -1,12 +1,12 @@
+import 'package:doctorapp/user_files/UserLogin.dart';
+import 'package:doctorapp/services/Location.dart' as location;
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctorapp/services/auth.dart';
-import 'package:doctorapp/user_files/U_Location.dart';
 
 class UserRegistration extends StatefulWidget {
   static const String id = 'UserRegistration';
-  final auth = new Auth();
   @override
   _UserRegistrationState createState() => _UserRegistrationState();
 }
@@ -17,8 +17,9 @@ class _UserRegistrationState extends State<UserRegistration> {
   String get _kUPhoneNumber => _uPhoneController.text;
   String get _kUEmergencyContact => _uEmergencyController.text;
   String get _kUAddress => _uAddressController.text;
-
+  String get _kUName => _uNameController.text;
   bool _load = false;
+  bool _uVain = false;
   final _firestore = FirebaseFirestore.instance;
 
   void _submit() async {
@@ -27,15 +28,20 @@ class _UserRegistrationState extends State<UserRegistration> {
         _load = true;
       });
       print('Alert Emergency Triggered');
-      await widget.auth.createUserWithEmailAndPassword(_kUEmail, _kUPassword);
-      _firestore.collection('user_id').add({
+      await auth.createUserWithEmailAndPassword(_kUEmail, _kUPassword);
+      location.Location userLoc = await location.location.getCurrentLocation();
+      _firestore.collection('user_id').doc(_kUPhoneNumber).set({
         'address': _kUAddress,
         'emergencycontact': _kUEmergencyContact,
         'phoneno': _kUPhoneNumber,
-        'user': _kUEmail,
+        'email': _kUEmail,
+        'name': _kUName,
+        'latitude': userLoc.kLatitude,
+        'longitude': userLoc.kLongitude,
+        'isInVain': _uVain,
       });
       print('User Registered');
-      Navigator.pushNamed(context, ULocation.id);
+      Navigator.pushNamed(context, UserLogin.id);
       setState(() {
         _load = false;
       });
@@ -49,6 +55,7 @@ class _UserRegistrationState extends State<UserRegistration> {
   final TextEditingController _uPhoneController = TextEditingController();
   final TextEditingController _uEmergencyController = TextEditingController();
   final TextEditingController _uAddressController = TextEditingController();
+  final TextEditingController _uNameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +110,27 @@ class _UserRegistrationState extends State<UserRegistration> {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(20.0),
+              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
+              child: TextField(
+                autofocus: true,
+                cursorColor: Colors.amber,
+                keyboardType: TextInputType.name,
+                textAlign: TextAlign.center,
+                controller: _uNameController,
+                decoration: InputDecoration(
+                  hintText: 'Enter your Name',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                    borderSide: BorderSide(
+                      color: Colors.amber,
+                      style: BorderStyle.solid,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: TextField(
                 autofocus: true,
                 cursorColor: Colors.amber,
@@ -123,7 +150,7 @@ class _UserRegistrationState extends State<UserRegistration> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              padding: EdgeInsets.all(20.0),
               child: TextField(
                 autofocus: true,
                 cursorColor: Colors.amber,
@@ -143,11 +170,11 @@ class _UserRegistrationState extends State<UserRegistration> {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(20.0),
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: TextField(
                 autofocus: true,
                 cursorColor: Colors.amber,
-                keyboardType: TextInputType.emailAddress,
+                keyboardType: TextInputType.streetAddress,
                 textAlign: TextAlign.center,
                 controller: _uAddressController,
                 decoration: InputDecoration(
@@ -163,7 +190,7 @@ class _UserRegistrationState extends State<UserRegistration> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 60.0),
+              padding: EdgeInsets.symmetric(horizontal: 60.0, vertical: 60),
               child: Material(
                 color: Colors.red[300],
                 borderRadius: BorderRadius.circular(5.0),

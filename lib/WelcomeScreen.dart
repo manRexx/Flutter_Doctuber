@@ -1,9 +1,8 @@
+import 'package:doctorapp/user_files/UserLogin.dart';
+import 'package:doctorapp/user_files/UserRegistration.dart';
 import 'Doctor_files/Doctor1.dart';
-import 'user_files/U_Location.dart';
-import 'user_files/User1.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:flutter/services.dart' as services;
 
 const kMainTextStyle = TextStyle(
   color: Colors.white,
@@ -12,6 +11,7 @@ const kMainTextStyle = TextStyle(
 );
 
 enum Hamburger { Doctor, User, Emergency }
+// ignore: non_constant_identifier_names
 Hamburger Page = Hamburger.Emergency;
 
 class WelcomeScreen extends StatefulWidget {
@@ -59,7 +59,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
                 GestureDetector(
                   child: ListTile(
-                    leading: Icon(Icons.shopping_basket),
+                    leading: Icon(Icons.local_hospital),
                     title: Text('Doctor'),
                   ),
                   onTap: () {
@@ -72,15 +72,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
                 GestureDetector(
                   child: ListTile(
-                    leading: Icon(Icons.book),
-                    title: Text('Users'),
+                    leading: Icon(Icons.account_box),
+                    title: Text('User Register'),
                   ),
                   onTap: () {
                     setState(() {
                       Page = Hamburger.User;
                       Navigator.pop(context);
                     });
-                    Navigator.pushNamed(context, User1.id);
+                    Navigator.pushNamed(context, UserRegistration.id);
                   },
                 ),
 //              ListTile(
@@ -137,15 +137,23 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    child: MaterialButton(
-                      onPressed: () {
-                        print('Alert Emergency Triggered');
-                        setState(() {});
-                        Navigator.pushNamed(context, ULocation.id);
-                      },
-                      child: Image.asset(
-                        'images/Emergency1.png',
-                        scale: 5,
+                    padding: EdgeInsets.all(20.0),
+                    child: Material(
+                      color: Colors.red[300],
+                      borderRadius: BorderRadius.circular(5.0),
+                      child: MaterialButton(
+                        onPressed: () {
+                          setState(() {});
+                          print('Alert Emergency Triggerd');
+                          Navigator.pushNamed(context, UserLogin.id);
+                        },
+                        child: Text(
+                          'User Login',
+                          style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
                       ),
                     ),
                   ),
